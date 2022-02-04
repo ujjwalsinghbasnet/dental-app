@@ -34,6 +34,7 @@ function Services() {
             justify='space-between'
             width='100%'
             position='relative'
+            flexWrap='wrap'
           >
             {
                 services.map((item) => <ServiceCard key={item.id} image={item.image} title={item.title} text={item.text} />)

@@ -20,7 +20,6 @@ function Navigation() {
       window.removeEventListener('scroll', null)
     }
   },[])
-  console.log(fixNav)
   return (
       <Flex 
         w='100%'

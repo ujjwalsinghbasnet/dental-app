@@ -21,6 +21,17 @@ const theme = extendTheme({
             _hover: {
               bg: 'primary'
             }
+          },
+          'secondary-btn': {
+            bg:'transparent',
+            p:'3',
+            borderRadius:'0',
+            color:'primary',
+            border:' 2px solid #18D2B1',
+            _hover: {
+              bg: 'primary',
+              color: 'white'
+            },
           }
         }
       }

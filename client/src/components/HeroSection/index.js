@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     Box,
     Flex,
@@ -9,21 +9,23 @@ import {
   } from '@chakra-ui/react'
 import NavResponsive from '../NavResponsive';
 import BottomCard from '../BottomCard';
+import Calendar from '../Calendar';
 
 function HeroSection() {
+    const [calendarState, setCalendarState] = useState(false)
+
   return (
       <>
         <Flex 
             w='100%' 
             h='39.5rem' 
-            maxW='1600px'
             bg='url("/images/hero-bg.png")'
             bgPos='center'
             bgRepeat='no-repeat'
             bgSize='cover'
             bgColor='#F9F2F2'
             justify='space-between'
-            pos='relative'
+            position='relative'
         >
         <NavResponsive />
         <Box
@@ -42,10 +44,20 @@ function HeroSection() {
             <Text color='menu' mt='1rem'>
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quasi veniam optio consenter quod beatae, atque quae ipsam, alias est reprehenderit debitis explicabo itaque pariatur nisi!
             </Text>
-            <Button variant='primary-btn' mt={'1.5rem'} textTransform='uppercase' fontSize={'1rem'} py='1.5rem'>
+            <Button 
+                variant='primary-btn' 
+                mt={'1.5rem'} 
+                textTransform='uppercase' 
+                fontSize={'1rem'} 
+                py='1.5rem'
+                onClick={() => setCalendarState(true)}
+            >
             Get Appointment
             </Button>
         </Box>
+        {
+            calendarState ? <Calendar /> : ''
+        }
         <Box
             w='35%'
             h='100%'

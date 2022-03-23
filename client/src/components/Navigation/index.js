@@ -23,7 +23,8 @@ function Navigation() {
   return (
       <Flex 
         w='100%'
-        h='4rem'
+        maxW='1600px'
+        h='4.5rem'
         pos={ fixNav ? 'fixed' : 'absolute'}
         top='0'
         l='0'
@@ -31,7 +32,7 @@ function Navigation() {
         align='center'
         bgColor={fixNav ? 'rgb(246,241,241,0.6)' : ''}
         backdropFilter='blur(5px)'
-        boxShadow={fixNav ? '0 2px 8px rgba(0,0,0,0.6)' : 'none'}
+        boxShadow={fixNav ? '0px 2px 8px rgba(0,0,0,0.6)' : 'none'}
         transition='0.3s linear'
         px='3rem'
         zIndex={3}

@@ -14,7 +14,7 @@ const theme = extendTheme({
       Button: {
         variants: {
           'primary-btn': {
-            p:'3',
+            p:'5',
             borderRadius:'0',
             bg:'primary',
             color:'white',

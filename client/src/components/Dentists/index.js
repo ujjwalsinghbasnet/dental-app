@@ -34,9 +34,10 @@ function Dentists() {
         <Box mt='-5rem'>
             <Heading as='h1' fontSize={'4rem'} color='primary' textAlign={'center'} lineHeight={'90%'} mb='4rem'>Dentists</Heading>
             <Flex
-            justify='space-between'
-            width='100%'
-            position='relative'
+              justify='space-between'
+              width='100%'
+              position='relative'
+              flexWrap={'wrap'}
             >
               {
                 dentists.map((dentist) => <DentistCards key={dentist.id} image={dentist.image} name={dentist.name} text={dentist.text} designation={dentist.designation} />)

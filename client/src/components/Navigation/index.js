@@ -34,10 +34,10 @@ function Navigation() {
         backdropFilter='blur(5px)'
         boxShadow={fixNav ? '0px 2px 8px rgba(0,0,0,0.6)' : 'none'}
         transition='0.3s linear'
-        px='3rem'
+        px={{base: '2rem', sm: '3.5rem', md: '4rem', lg: '6rem'}}
         zIndex={3}
       >
-          <Flex color='menu' w='40%' justify='space-between' ml={12}>
+          <Flex color='menu' w='40%' justify='space-between'>
             <NavLink to='#'>Home</NavLink>
             <NavLink to='#'>Services</NavLink>
             <NavLink to='#'>Dentists</NavLink>
@@ -45,13 +45,13 @@ function Navigation() {
           </Flex>
           <Flex 
             w='25%'
-            justify='space-evenly'
             align='center'
             color='primary'
+            justify='end'
           >
             <NavLink to='#'>Login</NavLink>
             <NavLink to='#'>
-                <Button variant='primary-btn'>
+                <Button variant='primary-btn'  ml='2rem'>
                     Create Account
                 </Button>
             </NavLink>

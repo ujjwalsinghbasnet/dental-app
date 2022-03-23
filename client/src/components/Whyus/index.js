@@ -5,7 +5,7 @@ import Section from '../Layouts/SectionLayout';
 function WhyUs() {
   return (
       <Section>
-        <Flex mt='2rem'>
+        <Flex mt='2rem' direction={{base: 'column-reverse', sm: 'column-reverse', md: 'row', lg:'row'}}>
         <Box w='100%' h='100%'>
             <Heading as='h1' fontSize={'4rem'} color='primary' textAlign='start' lineHeight={'90%'} mb='2rem'>Why Us</Heading>
             <Text>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quasi veniam optio consenter quod beatae, atque quae ipsam, alias est reprehenderit debitis explicabo itaque pariatur nisi!Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quasi veniam optio consenter quod beatae, atque quae ipsam, alias est reprehenderit debitis explicabo itaque pariatur nisi!
@@ -23,7 +23,7 @@ function WhyUs() {
             </Button>
           </Flex>
         </Box>
-        <Box pos='relative' width={'55%'} h='100%' alignSelf={'center'} mt='-7%'>
+        <Box pos='relative' width={{base: '90%', sm: '80%', md: '55%', lg: '55%'}} h='100%' alignSelf={'center'} mt='-7%'>
             <Box>
                 <Image objectFit={'cover'} src='/images/second-bg.png' alt='second bg' />
             </Box>

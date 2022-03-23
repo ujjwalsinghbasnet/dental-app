@@ -6,7 +6,7 @@ import {
 function Appointment() {
   return (
     <Box>
-
+      
     </Box>
   )
 }

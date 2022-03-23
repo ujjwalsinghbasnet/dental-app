@@ -32,7 +32,6 @@ function Services() {
           <Heading as='h1' fontSize={'4rem'} color='primary' textAlign={'center'} lineHeight={'90%'} mb='4rem' mt='-2rem'>Our Services</Heading>
           <Flex
             justify='space-between'
-            width='100%'
             position='relative'
             flexWrap='wrap'
           >

@@ -13,6 +13,7 @@ function DentistCards({ name, designation, image, text }) {
         pos='relative'
         cursor={'pointer'}
         overflow='hidden'
+        mb='2rem'
         onMouseOver={() => setHoverStatus(true)}
         onMouseLeave={() => setHoverStatus(false)}
     >

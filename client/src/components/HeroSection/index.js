@@ -15,7 +15,7 @@ function HeroSection() {
     const [calendarState, setCalendarState] = useState(false)
 
   return (
-      <>
+      <Box position={'relative'}>
         <Flex 
             w='100%' 
             h='39.5rem' 
@@ -29,16 +29,16 @@ function HeroSection() {
         >
         <NavResponsive />
         <Box
-            w={['100%','100%','65%']}
+            w={{base: '100%', sm: '100%', md: '100%', lg: '100%'}}
             h='100%'
             mt='8rem'
             py={12}
-            px={['2rem','3rem','6rem']}
+            px={{base: '2rem', sm: '3.5rem', md: '4rem', lg: '6rem'}}
         >
-            <Heading as='h1' color='primary' fontSize='4.5rem' lineHeight={'90%'}>
+            <Heading as='h1' color='primary' fontSize={{ base: '2.8rem', sm: '3.8rem', md: '4.5rem', lg: '4rem'}} lineHeight={'90%'}>
             Dental World
             </Heading>
-            <Heading as='h1' color='primary' fontSize='4.5rem'>
+            <Heading as='h1' color='primary' fontSize={{ base: '2.5rem', sm: '3rem', md: '4rem', lg: '3.5rem'}}>
             Smile As You wish
             </Heading>
             <Text color='menu' mt='1rem'>
@@ -61,7 +61,7 @@ function HeroSection() {
         <Box
             w='35%'
             h='100%'
-            display={['none','none','block']}
+            display={['none', 'none', 'none', 'block']}
         >
             <Image 
             w='100%'
@@ -69,9 +69,9 @@ function HeroSection() {
             src='/images/hero_image.jpg' 
             alt='banner'/>
         </Box>
-        <BottomCard />
         </Flex>
-      </>
+        <BottomCard />
+      </Box>
   );
 }
 

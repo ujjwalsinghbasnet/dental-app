@@ -16,6 +16,7 @@ function ServiceCard({ title, image, text }) {
         overflow='hidden'
         onMouseOver={() => setHoverStatus(true)}
         onMouseLeave={() => setHoverStatus(false)}
+        mb='2rem'
     >
         <Image src={image} alt={title} objectFit='cover' height='100%' w='100%'/>
         <Box 
@@ -24,7 +25,6 @@ function ServiceCard({ title, image, text }) {
             // backdropFilter={'blur(5px'}
             h='15%' 
             w='100%'
-            display='grid'
             placeItems='center'
             bottom='0'
             display={hoverStatus ? 'none' : 'grid'}

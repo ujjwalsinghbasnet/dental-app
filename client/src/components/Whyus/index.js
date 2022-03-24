@@ -7,7 +7,7 @@ function WhyUs() {
       <Section>
         <Flex mt='2rem' direction={{base: 'column-reverse', sm: 'column-reverse', md: 'row', lg:'row'}}>
         <Box w='100%' h='100%'>
-            <Heading as='h1' fontSize={'4rem'} color='primary' textAlign='start' lineHeight={'90%'} mb='2rem'>Why Us</Heading>
+            <Heading as='h1' fontSize={{ base: '2.8rem', sm: '3.8rem', md: '4.5rem', lg: '4rem'}} color='primary' textAlign='start' lineHeight={'90%'} mb='2rem'>Why Us</Heading>
             <Text>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quasi veniam optio consenter quod beatae, atque quae ipsam, alias est reprehenderit debitis explicabo itaque pariatur nisi!Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quasi veniam optio consenter quod beatae, atque quae ipsam, alias est reprehenderit debitis explicabo itaque pariatur nisi!
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quasi veniam optio consenter quod beatae, atque quae ipsam, alias est reprehenderit debitis explicabo itaque pariatur nisi!
             </Text>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import {
     Box,
     Flex,
@@ -44,16 +45,17 @@ function HeroSection() {
             <Text color='menu' mt='1rem'>
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quasi veniam optio consenter quod beatae, atque quae ipsam, alias est reprehenderit debitis explicabo itaque pariatur nisi!
             </Text>
-            <Button 
-                variant='primary-btn' 
-                mt={'1.5rem'} 
-                textTransform='uppercase' 
-                fontSize={'1rem'} 
-                py='1.5rem'
-                onClick={() => setCalendarState(true)}
-            >
-            Get Appointment
-            </Button>
+            <NavLink to='/appointment'>
+                <Button 
+                    variant='primary-btn' 
+                    mt={'1.5rem'} 
+                    textTransform='uppercase' 
+                    fontSize={'1rem'} 
+                    py='1.5rem'
+                >
+                    Get Appointment
+                </Button>
+            </NavLink>
         </Box>
         {
             calendarState ? <Calendar /> : ''

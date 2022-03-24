@@ -34,7 +34,7 @@ const theme = extendTheme({
             },
           }
         }
-      }
+      },
     }
   })
 

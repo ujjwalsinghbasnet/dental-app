@@ -49,8 +49,8 @@ function Navigation() {
             color='primary'
             justify='end'
           >
-            <NavLink to='#'>Login</NavLink>
-            <NavLink to='#'>
+            <NavLink to='/auth/login'>Login</NavLink>
+            <NavLink to='/auth/register'>
                 <Button variant='primary-btn'  ml='2rem'>
                     Create Account
                 </Button>

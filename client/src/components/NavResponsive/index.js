@@ -8,6 +8,9 @@ function NavResponsive() {
     const [mobStatus, setMobStatus] = useState(false)
 
     useEffect(() => {
+        if(window.innerWidth <= 770){
+            setMobStatus(true)
+        }
         window.addEventListener('resize', () => {
             console.log(window.innerWidth)
             if(window.innerWidth <= 770){

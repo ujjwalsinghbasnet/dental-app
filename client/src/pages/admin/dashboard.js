@@ -15,26 +15,26 @@ function Dashboard() {
             mt='10rem'
             flexWrap={'wrap'}
         >
-            <TopCard title='Total Number of Appointment today' value='10' />
-            <TopCard title='Total Number of Appointment today' value='10' />
-            <TopCard title='Total Number of Appointment today' value='10' />
+            <TopCard title='Total Number of Appointment today' value='10' color='#3DA5F4'/>
+            <TopCard title='Total Number of Appointment today' value='10' color='#00C689'/>
+            <TopCard title='Total Number of Appointment today' value='10' color='#FDA006'/>
         </Flex>
     </Layout>
   )
 }
 
-const TopCard = ({ title,value }) => {
+const TopCard = ({ title,value,color }) => {
     return (
         <VStack 
             w='30%'
             minW='20rem'
             mb='1.5rem'
-            bg='primary'
+            bg={color}
             p='1.5rem'
             borderRadius={'1.5rem'}
         >
-            <Text fontSize='1.5rem' fontWeight='bold' textAlign={'center'}>{title}</Text>
-            <Text fontSize='1.5rem'>{value}</Text>
+            <Text fontSize='1.5rem' fontWeight='bold' textAlign={'center'} color='white'>{title}</Text>
+            <Text fontSize='1.5rem' color='white'>{value}</Text>
         </VStack>
     )
 }

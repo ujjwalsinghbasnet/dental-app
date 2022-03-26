@@ -8,7 +8,7 @@ import Topbar from './Topbar'
 
 function Layout({ children, title }) {
 
-    const [toggle,setToggle] = useState(false)
+    const [toggle,setToggle] = useState(true)
 
     const closeSidebar = () => { setToggle(state => !state) }
 

@@ -12,7 +12,6 @@ const UserSchema = new mongoose.Schema({
     },
     gender: {
         type: String,
-        required: true,
         trim: true,
     },
     isDoctor: {
@@ -24,7 +23,6 @@ const UserSchema = new mongoose.Schema({
         trim: true,
         unique: true,
         required: true,
-        validate: [{ validator: value => isEmail(value), msg: 'Invalid email.' }]
     },
     phone: {
         type: String,

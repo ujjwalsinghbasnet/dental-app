@@ -1,0 +1,11 @@
+jwt -> gives access token and refresh token
+    access token - short lived
+    refresh token - long lived
+    DO NOT STORE ACCESS TOKEN IN LOCALSTORAGE OR MEMORY
+    REFRESH TOKEN -> 
+        SENT AS HTTP ONLY COOKIE
+        NOT ACCESSIBLE VIA JAVASCRIPT
+        MUST HAVE EXPIRY AT SOME POINT
+
+    ##INTERCEPTOR in axios
+    

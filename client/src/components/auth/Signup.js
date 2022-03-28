@@ -17,7 +17,7 @@ import {
   Text,
   useToast
 } from '@chakra-ui/react';
-import { NavLink } from 'react-router-dom';
+import { useNavigate, NavLink } from 'react-router-dom';
 import NavResponsive from '../NavResponsive';
 import { formValidation } from './formValidation';
 import { useDispatch } from 'react-redux'
@@ -27,14 +27,15 @@ function Signup() {
 
   const dispatch = useDispatch()
   const toast = useToast()
+  const navigate = useNavigate()
 
   const [info,setInfo] = useState({
     name: '',
     email: '',
     password: '',
-    gender: '',
     password1: '',
-    phone: ''
+    phone: '',
+    gender: 'notConfirmed'
   })
 
   const changeHandler = (e) => {
@@ -53,7 +54,9 @@ function Signup() {
         isClosable: true,
       })
     } else {
-      dispatch(register(info))
+      dispatch(register(info)).then(() => {
+        navigate('/login', {replace: true})
+      })
     }
   }
 
@@ -70,37 +73,37 @@ function Signup() {
           >
               <FormControl isRequired>
                 <FormLabel htmlFor='name'>Name</FormLabel>
-                <Input id='name' type='name' onChange={changeHandler}/>
+                <Input id='name' type='name' value={info.name} onChange={changeHandler}/>
                 <FormHelperText>must be at least 6 characters long</FormHelperText>
               </FormControl>
               <Spacer/>
               <Spacer/>
               <FormControl isRequired>
                 <FormLabel htmlFor='name'>Email</FormLabel>
-                <Input id='email' type='email' onChange={changeHandler}/>
+                <Input id='email' type='email' value={info.email} onChange={changeHandler}/>
               </FormControl>
               <Spacer/>
               <Spacer/>
               <FormControl isRequired>
                 <FormLabel htmlFor='phone'>Phone</FormLabel>
-                <Input id='phone' type='number' onChange={changeHandler}/>
+                <Input id='phone' type='number' value={info.phone} onChange={changeHandler}/>
               </FormControl>
               <Spacer/>
               <Spacer/>
               <FormControl isRequired>
                 <FormLabel htmlFor='password'>Password</FormLabel>
-                <Input id='password' type='password' onChange={changeHandler}/>
+                <Input id='password' type='password' value={info.password} onChange={changeHandler}/>
                 <FormHelperText>must be 6 digit and should consist of number and symbols</FormHelperText>
               </FormControl>
               <FormControl isRequired>
                 <FormLabel htmlFor='password1'>Confirm Password</FormLabel>
-                <Input id='password1' type='password' onChange={changeHandler}/>
+                <Input id='password1' type='password' value={info.password1} onChange={changeHandler}/>
                 <FormHelperText>password must match</FormHelperText>
               </FormControl>
               <Spacer />
               <FormControl as='fieldset'>
               <FormLabel as='legend'>Gender</FormLabel>
-                <RadioGroup defaultValue='notConfirmed' onChange={changeHandler}>
+                <RadioGroup defaultValue={info.gender} onChange={changeHandler}>
                   <HStack spacing='24px' mb='1rem'>
                     <Radio value='male'>Male</Radio>
                     <Radio value='female'>Female</Radio>

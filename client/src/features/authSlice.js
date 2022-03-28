@@ -19,6 +19,16 @@ export const register = createAsyncThunk('auth/register', async (userData, thunk
         return thunkData.rejectWithValue({ message: 'error' })
     }
 })
+export const login = createAsyncThunk('auth/login', async (userData, thunkData) => {
+    try{
+        const user = await authService.login(userData)
+        localStorage.setItem('dental_user',JSON.stringify(user.data.token)) 
+        console.log('saved to storage')
+        return user.data;
+    } catch (err) {
+        // return thunkData.rejectWithValue({ message: "error"})
+    }
+})
 
 export const authSlice = createSlice({
     name: 'auth',
@@ -42,9 +52,23 @@ export const authSlice = createSlice({
             })
             .addCase(register.rejected, (state,action) => {
                 state.isLoading = false
+                state.isSuccess = false
                 state.message = action.payload
+            })
+            .addCase(login.pending, (state,action) => {
+                state.isLoading = true
+            })
+            .addCase(login.fulfilled, (state,action) => {
+                state.isLoading = false
+                state.user = action.payload
+                state.isSuccess = true
+            })
+            .addCase(login.rejected, (state,action) => {
+                state.isLoading = false
+                state.isSuccess = false
+                state.user = action.payload
             })
     }
 })
-
+export const { reset } = authSlice.actions
 export default authSlice.reducer

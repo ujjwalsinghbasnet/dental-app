@@ -62,7 +62,7 @@ const login = async (req,res) => {
     const { email,password } = req.body
     const userExists = await User.findOne({ email })
     if(!userExists){
-        res.json({
+        res.status(404).json({
             message: "User does not exist."
         })
     } else {
@@ -89,7 +89,7 @@ const login = async (req,res) => {
                     user
                 })
             } else {
-                res.json({message: "Password or email mismatched!"})
+                res.status(403).json({message: "Password or email mismatched!"})
               }
         })
     }

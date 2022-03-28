@@ -10,24 +10,50 @@ import {
   VStack,
   Spacer,
   Button,
-  HStack
+  HStack,
+  useToast
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { useDispatch,useSelector } from 'react-redux';
+import { NavLink, useNavigate,useLocation } from 'react-router-dom';
+import { login } from '../../features/authSlice';
 import NavResponsive from '../NavResponsive';
+import { loginValidation } from './formValidation';
 
 
 function Login() {
+  const toast = useToast()
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const location = useLocation()
+  const state = useSelector(state => state.auth)
   const [info,setInfo] = useState({
-    name: '',
     email: '',
     password: '',
-    gender: ''
   })
 
   const changeHandler = (e) => {
-    setInfo({...info, [e.target.name]: e.target.value});
+    setInfo({...info, [e.target.id]: e.target.value});
   }
+  
+  const submitHandler = (e) => {
+    e.preventDefault();
+    const details = loginValidation(info)
+    if(!details.status){
+      toast({
+        title: details.title,
+        description: details.message,
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      })
+    } else {
+      dispatch(login(info)).then(() => {
+        navigate(location.state.from, {replace: true})
+      })
+    }
+  }
+  
 
   return (
     <Box w='100%' maxW='1600px' margin='auto'>
@@ -42,18 +68,18 @@ function Login() {
           >
               <FormControl isRequired>
                 <FormLabel htmlFor='name'>Email</FormLabel>
-                <Input id='email' type='email' onChange={changeHandler}/>
+                <Input id='email' type='email' onChange={changeHandler} defaultValue={info.email}/>
               </FormControl>
               <Spacer/>
               <Spacer/>
               <FormControl isRequired>
                 <FormLabel htmlFor='password'>Password</FormLabel>
-                <Input id='password' type='password' onChange={changeHandler}/>
+                <Input id='password' type='password' defaultValue={info.password} onChange={changeHandler}/>
               </FormControl>
               <Spacer />
               <Spacer />
               <HStack height='4rem' align='center' spacing={4}>
-                <Button variant='primary-btn'>Login</Button>
+                <Button variant='primary-btn' onClick={submitHandler}>{state.isLoading ? 'Logging...' : 'Login'}</Button>
                 <Spacer />
                 <Text>Don't have an account?<NavLink to='/auth/register'><Text color='primary' textDecoration={'underline'}>Signup</Text></NavLink></Text>
               </HStack>

@@ -27,13 +27,13 @@ const TopCard = ({ title,value,color }) => {
     return (
         <VStack 
             w='30%'
-            minW='20rem'
+            minW='15rem'
             mb='1.5rem'
             bg={color}
             p='1.5rem'
             borderRadius={'1.5rem'}
         >
-            <Text fontSize='1.5rem' fontWeight='bold' textAlign={'center'} color='white'>{title}</Text>
+            <Text fontSize={{ base: '0.8rem', sm: '0.8rem', md: '0.9rem', lg:'1.2rem' }} fontWeight='bold' textAlign={'center'} color='white'>{title}</Text>
             <Text fontSize='1.5rem' color='white'>{value}</Text>
         </VStack>
     )

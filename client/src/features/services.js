@@ -7,12 +7,18 @@ const register = async (formData) => {
     return user.data
 }
 
+const login = async (formData) => {
+    const user = await axios.post(API_URL + 'users/login', formData)
+    return user
+}
+
 const logout = () => {
-    localStorage.removeItem('user')
+    localStorage.removeItem('dental_user')
 }
 
 const authService = {
     register,
+    login,
     logout
 }
 

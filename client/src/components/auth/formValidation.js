@@ -27,3 +27,19 @@ export const formValidation = (userData) => {
       }
       return { status: true, title:'User Created Successfully', message:'' };
 }
+
+export const loginValidation = (userData) => {
+  const { email, password } = userData;   
+
+  const emailRegex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+  if(email==='' || password===''){
+    return { status: false, title:'Empty Fields', message:'please fill out all the fields' };
+  }
+  if(!email.match(emailRegex)){
+    return { status: false, title:'Email Invalid!', message:'enter valid email address' };
+  }
+  else {
+    return { status: true, title:'Logging in...', message:'' }
+  }
+}

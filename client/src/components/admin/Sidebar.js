@@ -10,11 +10,16 @@ import {
 import { FiLogOut } from 'react-icons/fi'
 import { NavLink } from 'react-router-dom'
 import { GiHamburgerMenu } from 'react-icons/gi'
-
+import { useDispatch } from 'react-redux'
+import authService from '../../features/services'
+import { reset } from '../../features/authSlice'
+import { useNavigate } from 'react-router-dom'
 
 function Sidebar({ closeSidebar, isOpen }) {
     
     const [pos,setPos] = useState(false)
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     useEffect(() => {
         if(window.innerWidth <= 975){
@@ -31,6 +36,12 @@ function Sidebar({ closeSidebar, isOpen }) {
             window.removeEventListener('resize', null)
         }
     },[])
+
+    const logoutUser = () => {
+        authService.logout()
+        dispatch(reset())
+        navigate('/', {replace:true})
+    }
 
   return (
     <Box 
@@ -49,7 +60,7 @@ function Sidebar({ closeSidebar, isOpen }) {
             justify={'space-between'}
             align='center'
         >   
-            <Heading as='h1' fontSize={{base: '1.5rem', sm: '1.5rem', md: '1.5rem', lg: '2rem'}}>Dental World</Heading>
+            <Heading as='h1' fontSize={{base: '0.9rem', sm: '1rem', md: '1rem', lg: '1.5rem'}}>Dental World</Heading>
             {
                 pos ?  <GiHamburgerMenu style={{fontSize: '2rem', cursor: 'pointer', color: '#797171'}} onClick={closeSidebar} /> : ''
             }
@@ -61,16 +72,16 @@ function Sidebar({ closeSidebar, isOpen }) {
             pt='10rem'
         >
             <NavLink to='/admin'>
-                <Text fontSize={{ base: '1.5rem', sm: '1.5rem', md: '1.5rem', lg:'1.8rem' }}>Dashboard</Text>
+                <Text fontSize={{ base: '0.8rem', sm: '0.8rem', md: '0.9rem', lg:'1.2rem' }}>Dashboard</Text>
             </NavLink>
             <NavLink to='/admin/schedules'>
-                <Text fontSize={{ base: '1.5rem', sm: '1.5rem', md: '1.5rem', lg:'1.8rem' }}>Schedules</Text>
+                <Text fontSize={{ base: '0.8rem', sm: '0.8rem', md: '0.9rem', lg:'1.2rem' }}>Schedules</Text>
             </NavLink>
             <NavLink to='/admin/patients'>
-                <Text fontSize={{ base: '1.5rem', sm: '1.5rem', md: '1.5rem', lg:'1.8rem' }}>Patients</Text>
+                <Text fontSize={{ base: '0.8rem', sm: '0.8rem', md: '0.9rem', lg:'1.2rem' }}>Patients</Text>
             </NavLink>
             <NavLink to='/admin/doctors'>
-                <Text fontSize={{ base: '1.5rem', sm: '1.5rem', md: '1.5rem', lg:'1.8rem' }}>Doctors</Text>
+                <Text fontSize={{ base: '0.8rem', sm: '0.8rem', md: '0.9rem', lg:'1.2rem' }}>Doctors</Text>
             </NavLink>
         </VStack>
         <Flex
@@ -83,7 +94,7 @@ function Sidebar({ closeSidebar, isOpen }) {
                 backgroundColor='transparent'
                 border='none'
                 p='0'
-                fontSize={'1.5rem'}
+                fontSize={{ base: '0.8rem', sm: '0.8rem', md: '0.9rem', lg:'1.2rem' }}
                 _hover={{
                     backgroundColor: 'transparent',
                     border: 'none'
@@ -96,6 +107,7 @@ function Sidebar({ closeSidebar, isOpen }) {
                     backgroundColor: 'transparent',
                     border: 'none'
                 }}
+                onClick={logoutUser}
             >
                 Logout
             </Button>

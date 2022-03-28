@@ -21,9 +21,21 @@ function App() {
             <Dashboard />
           </ProtectedRoute>
         }/>
-        <Route path='/admin/patients' element={<Patients />} />
-        <Route path='/admin/doctors' element={<Doctors />} />
-        <Route path='/admin/schedules' element={<Schedules />} />
+        <Route path='/admin/patients' element={
+          <ProtectedRoute>
+            <Patients />
+          </ProtectedRoute>
+        }/>
+        <Route path='/admin/doctors' element={
+          <ProtectedRoute>
+            <Doctors />
+          </ProtectedRoute>
+        }/>
+        <Route path='/admin/schedules' element={
+          <ProtectedRoute>
+            <Schedules />
+          </ProtectedRoute>
+        }/>
         <Route path='/' element={<Home />} />
       </Routes>
   );

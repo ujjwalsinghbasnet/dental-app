@@ -64,12 +64,14 @@ function HeroSection() {
             w='35%'
             h='100%'
             display={['none', 'none', 'none', 'block']}
+            bgImage='/images/hero_image.jpg'
+            backgroundSize={'cover'}
         >
-            <Image 
+            {/* <Image 
             w='100%'
             h='100%'
             src='/images/hero_image.jpg' 
-            alt='banner'/>
+            alt='banner'/> */}
         </Box>
         </Flex>
         <BottomCard />

@@ -21,7 +21,7 @@ function Dentists() {
         image: '/images/hero_image.png'
     },
     {
-        id: 1,
+        id: 2,
         name: 'Dr. Marie Cooper',
         designation: 'Dental Surgeon',
         text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quasi veniam optio consenter quod beatae, atque quae ipsam, alias est reprehenderit debitis explicabo itaque pariatur nisi!',

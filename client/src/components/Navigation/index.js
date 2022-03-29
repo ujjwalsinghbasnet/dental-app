@@ -4,11 +4,22 @@ import {
     Button,
     Flex
 } from '@chakra-ui/react'
+import authService from '../../features/services';
+import { useDispatch } from 'react-redux';
+import { reset } from '../../features/authSlice'
+import { useNavigate } from 'react-router-dom'
 
 function Navigation() {
   const [fixNav,setFixNav] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('dental_user'))
+    if(user){
+      setIsLoggedIn(true)
+    }
     window.addEventListener('scroll', () => {
       if(window.scrollY >= 400){
         setFixNav(true)
@@ -19,7 +30,15 @@ function Navigation() {
     return () => {
       window.removeEventListener('scroll', null)
     }
-  },[])
+  },[setIsLoggedIn])
+
+  const logoutUser = () => {
+    authService.logout()
+    dispatch(reset())
+    navigate('/', {replace:true})
+    setIsLoggedIn(false)
+}
+
   return (
       <Flex 
         w='100%'
@@ -43,19 +62,35 @@ function Navigation() {
             <NavLink to='#'>Dentists</NavLink>
             <NavLink to='#'>Contact Us</NavLink>
           </Flex>
-          <Flex 
-            w='25%'
-            align='center'
-            color='primary'
-            justify='end'
-          >
+          {
+            ! isLoggedIn ? ( 
+            <Flex 
+              w='25%'
+              align='center'
+              color='primary'
+              justify='end'
+            >
             <NavLink to='/auth/login'>Login</NavLink>
             <NavLink to='/auth/register'>
                 <Button variant='primary-btn'  ml='2rem'>
                     Create Account
                 </Button>
             </NavLink>
-          </Flex>
+            </Flex>
+            ) : (
+              <Flex 
+                w='25%'
+                align='center'
+                color='primary'
+                justify='end'
+              >
+                <NavLink to='/user/profile'>Profile</NavLink>
+                <Button variant='primary-btn'  ml='2rem' onClick={logoutUser}>
+                    Logout
+                </Button>
+              </Flex>
+            )
+          }
       </Flex>
   )
 }

@@ -48,8 +48,13 @@ function Login() {
         isClosable: true,
       })
     } else {
-      dispatch(login(info)).then(() => {
-        navigate(location.state.from, {replace: true})
+      dispatch(login(info)).then((res) => {
+        console.log(res)
+        if(location.state?.from){
+          navigate(location.state.from, {replace: true})
+        } else {
+          navigate('/', { replace: true })
+        }
       })
     }
   }
@@ -60,7 +65,7 @@ function Login() {
       <NavResponsive />
       <Flex justify='space-between' w='100%' maxW='1600px' h='100vh' px={{base: '2rem', sm: '3.5rem', md: '4rem', lg: '6rem'}} margin='auto' pt='8rem'>
         <Box w={{base: '100%', sm: '100%', md: '100%', lg:'55%'}} >
-          <Heading as='h1' color='primary' fontSize={{ base: '2.8rem', sm: '3.8rem', md: '4.5rem', lg: '4rem'}} >Login and start booking</Heading>
+          <Heading as='h1' color='primary' fontSize={{ base: '2.8rem', sm: '3rem', md: '3.5rem', lg: '3.5rem'}} >Login and start booking</Heading>
           <VStack
             mt='5rem'
             w='95%'
@@ -81,7 +86,7 @@ function Login() {
               <HStack height='4rem' align='center' spacing={4}>
                 <Button variant='primary-btn' onClick={submitHandler}>{state.isLoading ? 'Logging...' : 'Login'}</Button>
                 <Spacer />
-                <Text>Don't have an account?<NavLink to='/auth/register'><Text color='primary' textDecoration={'underline'}>Signup</Text></NavLink></Text>
+                <Text>Don't have an account?<NavLink to='/auth/register'><span style={{textDecoration: 'underline', color: '#18D2B1', marginLeft: '0.5rem'}}>Signup</span></NavLink></Text>
               </HStack>
             </VStack>
         </Box>

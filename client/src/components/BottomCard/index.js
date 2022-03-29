@@ -36,7 +36,7 @@ function BottomCard() {
         display={{base:'none', sm:'flex', md: 'flex', lg: 'flex'}}
       >
           {
-              bottomData.map(data => <Flex p={5} w={{base: '33%', sm: '33%', md: '33%', lg: '28%'}} justify='space-between' bg='transparentPrimary' align='center' backdropFilter='blur(5px)'>
+              bottomData.map((data,index) => <Flex p={5} w={{base: '33%', sm: '33%', md: '33%', lg: '28%'}} justify='space-between' bg='transparentPrimary' align='center' backdropFilter='blur(5px)' key={index}>
                   {data.icon}
                   <Flex w='90%' direction='column' pl={2}>
                       <Heading as='h3' fontWeight='medium' fontSize='2xl'>{data.heading}</Heading>

@@ -12,7 +12,6 @@ function NavResponsive() {
             setMobStatus(true)
         }
         window.addEventListener('resize', () => {
-            console.log(window.innerWidth)
             if(window.innerWidth <= 770){
                 setMobStatus(true)
             } else{

@@ -13,7 +13,7 @@ console.log(theme.config.initialColorMode)
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Router>
+      <Router basename='/'>
         <ChakraProvider theme={theme}>
           <ColorModeScript initialColorMode={theme.config.initialColorMode}/>
           <App />

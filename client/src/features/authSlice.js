@@ -21,12 +21,14 @@ export const register = createAsyncThunk('auth/register', async (userData, thunk
 })
 export const login = createAsyncThunk('auth/login', async (userData, thunkData) => {
     try{
-        const user = await authService.login(userData)
-        localStorage.setItem('dental_user',JSON.stringify(user.data.token)) 
-        console.log('saved to storage')
+        const userResponse = await authService.login(userData)
+        const { token, user} = userResponse.data
+        let isAdmin = false
+        if(user?.role === 'admin') { isAdmin = true }
+        localStorage.setItem('dental_user',JSON.stringify({ token, isAdmin }))
         return user.data;
     } catch (err) {
-        // return thunkData.rejectWithValue({ message: "error"})
+        return thunkData.rejectWithValue({ message: "error"})
     }
 })
 

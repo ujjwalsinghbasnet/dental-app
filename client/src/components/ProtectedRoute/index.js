@@ -1,14 +1,21 @@
 import React from 'react'
 import { Navigate, useLocation } from 'react-router-dom'
-import { useSelector } from 'react-redux'
 
 function ProtectedRoute({ children }) {
     const location = useLocation()
-    const user = useSelector(state => state.auth.user)
+
     const storageUser = JSON.parse(localStorage.getItem('dental_user'))
-    if(!user && !storageUser){
-        return <Navigate to='/auth/login' state={{from: location}}/>
+
+    if(storageUser?.token){
+      //checks if the logged in user is admin
+      if((!storageUser?.isAdmin) && location.pathname.startsWith('/admin')){
+        //if not admin and tries to navigate to dashboard redirect to home page
+        return <Navigate to='/'/>
+      }
+    } else {
+      return <Navigate to='/auth/login' state={{from: location}}/> //redirect non-logged in user
     }
+
   return children
 }
 

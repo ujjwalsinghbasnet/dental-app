@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { Box, Flex, Heading } from '@chakra-ui/react'
+import { Box, Button, Flex, Heading,useToast } from '@chakra-ui/react'
 import NavResponsive from '../components/NavResponsive'
 import Calendar from '../components/Calendar'
 import AppointmentSlot from '../components/Appointment/AppointmentSlot'
@@ -22,9 +22,25 @@ const appointments = [
 function Appointment() {
 
   const [activeAppointment,setActiveAppointment] = useState(null)
+  const toast = useToast()
 
   const focusAppointment = (id) => {
     setActiveAppointment(id)
+  }
+  
+  const bookAppointment = () => {
+    if(!activeAppointment){
+      toast({
+        title: 'No Appointment Selected!',
+        description: 'please select a slot.',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      })
+    } else {
+      const selectedAppointment = appointments.filter(appointment => appointment.id === activeAppointment)[0]
+      console.log(selectedAppointment)
+    }
   }
 
   return (
@@ -52,12 +68,21 @@ function Appointment() {
           w='100%'
           mt='3rem'
           position='relative'
+          direction={{base: 'column', sm:'column', md:'row', lg:'row'}}
         >
           <Calendar />
           <Box ml='5%' w='100%'>
-            <Heading as='h1' fontSize={{ base: '1rem', sm: '1rem', md: '1.3rem', lg: '1.5rem' }} mb='1.5rem'>Appointments Available</Heading>
+            <Flex
+              mb='1.5rem'
+              w='100%'
+              justify='space-between'
+              align='center'
+            >
+              <Heading as='h1' fontSize={{ base: '1rem', sm: '1rem', md: '1.3rem', lg: '1.5rem' }}>Available</Heading>
+              <Button variant='secondary-btn' onClick={bookAppointment}>Book Appointment</Button>
+            </Flex>
             {
-              appointments.map(appointment => <AppointmentSlot appointment={appointment} key={appointment.id} handleClick={focusAppointment} activeAppointment={activeAppointment}/>)
+              appointments.map(appointment => <AppointmentSlot appointment={appointment} key={appointment.id} handleClick={focusAppointment} active={activeAppointment}/>)
             }
           </Box>
         </Flex>

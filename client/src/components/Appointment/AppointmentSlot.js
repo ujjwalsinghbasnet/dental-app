@@ -1,28 +1,14 @@
-import React, { useRef,useState } from 'react'
+import React from 'react'
 import {
     Box,
     Flex,
     Heading
 } from '@chakra-ui/react'
 
-//linear-gradient(to left, #19d3b0, #0d7ea6)
 
-function AppointmentSlot({ appointment,handleClick }) {
-  const selected = useRef()
-  const [active,setActive] = useState(null)
+function AppointmentSlot({ appointment,handleClick,active }) {
 
-  const styleSelected = (id) => {
-    // const activeSlot = selected.current
-    //   if(activeSlot.classList.contains('activeAppointment')){
-    //     activeSlot.classList.remove('activeAppointment')
-    //   } else {
-    //     activeSlot.classList.add('activeAppointment')
-    //   }
-    // // selected.current.style.border = '2px solid #0d7ea6'
-    // console.log(selected)
-  }
-  const { id,activeAppointment } = appointment
-
+  const { id } = appointment
   return (
     <Box 
       w='100%'
@@ -32,7 +18,7 @@ function AppointmentSlot({ appointment,handleClick }) {
       bgImage={'linear-gradient(to left,#18D2AE, #0FCFEA)'}
       cursor='pointer'
       onClick={() => handleClick(id)}
-      border = {activeAppointment===id ? '2px solid red' : ''}
+      border = {active===id ? '2px solid  #0d7ea6' : ''}
     >
         <Heading as='h3' fontSize={{base: '0.8rem', sm: '0.8rem', md: '1rem', lg: '1rem'}} mb='0.7rem' color='#ebe5e5'>9AM-10AM</Heading>
         <Flex

@@ -22,7 +22,7 @@ function MobileMenu() {
                 pos='fixed'
                 top='0'
                 right='0'
-                zIndex='4'
+                zIndex='6'
                 justify='space-evenly'
                 align='center'
                 py='2rem'

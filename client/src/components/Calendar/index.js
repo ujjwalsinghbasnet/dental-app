@@ -13,7 +13,6 @@ function Calendar() {
         width='20rem'
         height='20rem'
         zIndex={'5'}
-        position='absolute'
     >
         <DatePicker 
             value={date} 

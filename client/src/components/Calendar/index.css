@@ -1,6 +1,6 @@
 .react-calendar {
   width: 20rem;
-  height: 15rem;
+  height: 16.5rem;
   background-image: linear-gradient(to right, #18d2ae, #0fcfea);
   backdrop-filter: blur(5px);
   padding: 0.8rem;
@@ -22,10 +22,12 @@
 abbr {
   text-decoration: none !important;
 }
-.react-calendar__tile--active {
-  background-color: rgba(24, 210, 177, 0.8);
+.react-calendar__tile {
   height: 2rem;
   width: 2rem;
+}
+.react-calendar__tile--active {
+  background-color: #0d7ea6;
   border-radius: 50%;
 }
 .react-calendar__month-view__days > button:disabled {

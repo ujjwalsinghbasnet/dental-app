@@ -15,8 +15,7 @@ import authService from '../../features/services'
 import { reset } from '../../features/authSlice'
 import { useNavigate } from 'react-router-dom'
 
-function Sidebar({ closeSidebar, isOpen }) {
-    
+function Sidebar({ closeSidebar, isOpen,menu }) {
     const [pos,setPos] = useState(false)
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -71,18 +70,13 @@ function Sidebar({ closeSidebar, isOpen }) {
             spacing={'2rem'}
             pt='10rem'
         >
-            <NavLink to='/admin'>
-                <Text fontSize={{ base: '0.8rem', sm: '0.8rem', md: '0.9rem', lg:'1.2rem' }}>Dashboard</Text>
-            </NavLink>
-            <NavLink to='/admin/schedules'>
-                <Text fontSize={{ base: '0.8rem', sm: '0.8rem', md: '0.9rem', lg:'1.2rem' }}>Schedules</Text>
-            </NavLink>
-            <NavLink to='/admin/patients'>
-                <Text fontSize={{ base: '0.8rem', sm: '0.8rem', md: '0.9rem', lg:'1.2rem' }}>Patients</Text>
-            </NavLink>
-            <NavLink to='/admin/doctors'>
-                <Text fontSize={{ base: '0.8rem', sm: '0.8rem', md: '0.9rem', lg:'1.2rem' }}>Doctors</Text>
-            </NavLink>
+            {
+                menu && menu.map((single) => (
+                    <NavLink to={single.link} key={single.text}>
+                        <Text fontSize={{ base: '0.8rem', sm: '0.8rem', md: '0.9rem', lg:'1.2rem' }}>{single.text}</Text>
+                    </NavLink>
+                ))
+            }
         </VStack>
         <Flex
             height={'5%'}

@@ -28,7 +28,7 @@ function Navigation() {
       }
     })
     return () => {
-      window.removeEventListener('scroll', null)
+      window.removeEventListener('scroll',null)
     }
   },[setIsLoggedIn])
 

@@ -9,13 +9,19 @@ import Patients from './pages/admin/patients';
 import Doctors from './pages/admin/doctors';
 import Schedules from './pages/admin/schedules';
 import ProtectedRoute from './components/ProtectedRoute';
+import UserProfile from './components/user/UserProfile';
+import UserAppointment from './components/user/UserAppointment';
 
 function App() {
   return (
       <Routes>
         <Route path='/auth/login' element={<Login />} />
         <Route path='/auth/register' element={<Signup />}/>
-        <Route path='/appointment' element={<Appointment />} />
+        <Route path='/appointment' element={
+          <ProtectedRoute>
+            <Appointment />
+          </ProtectedRoute>
+        }/>
         <Route path='/admin/' element={
           <ProtectedRoute>
             <Dashboard />
@@ -34,6 +40,16 @@ function App() {
         <Route path='/admin/schedules' element={
           <ProtectedRoute>
             <Schedules />
+          </ProtectedRoute>
+        }/>
+        <Route path='/user/profile' element={
+          <ProtectedRoute>
+            <UserProfile />
+          </ProtectedRoute>
+        }/>
+        <Route path='/user/appointments' element={
+          <ProtectedRoute>
+            <UserAppointment />
           </ProtectedRoute>
         }/>
         <Route path='/' element={<Home />} />

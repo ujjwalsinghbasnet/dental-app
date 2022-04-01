@@ -1,24 +1,18 @@
 const mongoose = require('mongoose');
 
 const appointmentSchema = new mongoose.Schema({
-    name: {
+    timeslot: {
         type: String,
         trim: true,
         required: true
+    },
+    doctor: {
+        type: String,
+        required: true  
     },
     visited: {
         type: Boolean,
         default: false
-    },
-    email: {
-        type: String,
-        trim: true,
-        required: true
-    },
-    phone: {
-        type: String,
-        trim: true,
-        required: true
     },
     date: {
         type: String,

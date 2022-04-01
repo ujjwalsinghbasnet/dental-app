@@ -22,10 +22,15 @@ const appointments = [
 function Appointment() {
 
   const [activeAppointment,setActiveAppointment] = useState(null)
+  const [date, setDate] = useState(new Date())
   const toast = useToast()
 
   const focusAppointment = (id) => {
     setActiveAppointment(id)
+  }
+  const handleDateChange = (date) => {
+    setDate(date)
+    console.log(date.toLocaleDateString())
   }
   
   const bookAppointment = () => {
@@ -70,7 +75,7 @@ function Appointment() {
           position='relative'
           direction={{base: 'column', sm:'column', md:'row', lg:'row'}}
         >
-          <Calendar />
+          <Calendar date={date} handleChange={handleDateChange}/>
           <Box ml='5%' w='100%'>
             <Flex
               mb='1.5rem'

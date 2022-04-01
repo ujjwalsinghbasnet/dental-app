@@ -5,8 +5,7 @@ import {
 import DatePicker from 'react-date-picker/dist/entry.nostyle';
 import './index.css'
 
-function Calendar() {
-    const [date, onChange] = useState(new Date())
+function Calendar({ date, handleChange }) {
 
   return (
     <Box
@@ -16,9 +15,10 @@ function Calendar() {
     >
         <DatePicker 
             value={date} 
-            onChange={onChange} 
             isOpen={true}
             minDate={new Date()}
+            selected = {date}
+            onChange = {(date) => handleChange(date)}
         />
     </Box>
   )

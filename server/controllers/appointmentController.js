@@ -2,22 +2,28 @@ const Appointment = require('../models/appointment')
 const { ObjectId } = require('mongoose').Types
 
 const getAllAppointments = async (req,res) => {
-    console.log(req.user)
-    const limit = req.query.limit
-    const filter = req.query.filter
-    let appointments;
-    if(limit){
-        appointments = await Appointment.find().sort({ createdAt: -1 }).limit(parseInt(limit)).populate('user','name phone')
-    } else if(filter){
-        appointments = await Appointment.find({ date: { $in: [filter]}}).sort({ createdAt: -1 }).populate('user','name phone')
-    } else {
-        appointments = await Appointment.find().sort({ createdAt: -1 }).populate('user','name phone')
-    }
+    
+    if(req.user.role === 'admin'){
+        const limit = req.query.limit
+        const filter = req.query.filter
+        let appointments;
+        if(limit){
+            appointments = await Appointment.find().sort({ createdAt: -1 }).limit(parseInt(limit)).populate('user','name phone')
+        } else if(filter){
+            appointments = await Appointment.find({ date: { $in: [filter]}}).sort({ createdAt: -1 }).populate('user','name phone')
+        } else {
+            appointments = await Appointment.find().sort({ createdAt: -1 }).populate('user','name phone')
+        }
 
-    res.status(200).json({
-        message: 'success',
-        results: appointments
-    })
+        return res.status(200).json({
+            message: 'success',
+            results: appointments
+        })
+    } else {
+        res.status(503).json({
+            message: 'Not Authorized'
+        })
+    }
 }
 
 const getSingleAppointment = async (req,res) => {

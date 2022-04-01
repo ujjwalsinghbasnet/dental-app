@@ -12,7 +12,6 @@ const verifyUser = async (req,res,next) => {
             })
         } else {
             req.user = decoded
-            console.log(decoded)
             next();
         }
     })

@@ -11,7 +11,7 @@ const availableappointmentSchema = new mongoose.Schema({
     trim:true,
     required:true
   },
-  time: {
+  timeslot: {
     type:String,
     trim:true,
     required:true

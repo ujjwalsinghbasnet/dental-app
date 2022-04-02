@@ -3,6 +3,7 @@ import fetchServices from "./services";
 
 const initialState = {
     appointment: [],
+    availableAppointment: [],
     isLoading: false,
     isSuccess: false,
     message: ''
@@ -23,6 +24,15 @@ export const scheduleUserAppointment = createAsyncThunk('appointment/schedule', 
         return appointment
     } catch(err){
         return thunkData.rejectWithValue({message: 'error occurred'})
+    }
+})
+
+export const getAvailableAppointment = createAsyncThunk('appointment/getAvailableApp', async (date,thunkData) => {
+    try{
+        const appointments = await fetchServices.retrieveAvailableAppointment(date)
+        return appointments
+    } catch(error){
+        return thunkData.rejectWithValue({message: error?.message || 'error occurred'})
     }
 })
 
@@ -57,6 +67,18 @@ const appointmentSlice = createSlice({
             .addCase(getUserAppointments.rejected, (state,action) => {
                 state.isSuccess = false
                 state.isLoading = false
+            })
+            .addCase(getAvailableAppointment.pending, (state,action) => {
+                state.isLoading = true
+            })
+            .addCase(getAvailableAppointment.fulfilled, (state,action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.availableAppointment = action.payload
+            })
+            .addCase(getAvailableAppointment, (state,action) => {
+                state.isLoading = false
+                state.isSuccess = false
             })
     }
 })

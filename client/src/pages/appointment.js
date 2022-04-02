@@ -1,43 +1,51 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { Box, Button, Flex, Heading,useToast } from '@chakra-ui/react'
-import { useDispatch } from 'react-redux'
+import { useDispatch,useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import NavResponsive from '../components/NavResponsive'
 import Calendar from '../components/Calendar'
 import AppointmentSlot from '../components/Appointment/AppointmentSlot'
-import { scheduleUserAppointment } from '../features/appointmentSlice'
+import { getAvailableAppointment, scheduleUserAppointment } from '../features/appointmentSlice'
 
-const appointments = [
-  {
-    id: 1,
-    timeslot: '9AM-10AM',
-    doctor: 'Dr. John Doe',
-    space: 2
-  },
-  {
-    id: 2,
-    timeslot: '9AM-10AM',
-    doctor: 'Dr. John Doe',
-    space: 2
-  }
-] 
+// const appointments = [
+//   {
+//     id: 1,
+//     timeslot: '9AM-10AM',
+//     doctor: 'Dr. John Doe',
+//     space: 2
+//   },
+//   {
+//     id: 2,
+//     timeslot: '9AM-10AM',
+//     doctor: 'Dr. John Doe',
+//     space: 2
+//   }
+// ] 
 
 function Appointment() {
 
   // const appointments = useSelector(state => state.appointment)
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const toast = useToast()
+
+  const appointments = useSelector(state => state.appointment.availableAppointment)
   const [activeAppointment,setActiveAppointment] = useState(null)
   const [date, setDate] = useState(new Date())
-  const toast = useToast()
   const user = JSON.parse(localStorage.getItem('dental_user'))
+
+  useEffect(() => {
+    dispatch(getAvailableAppointment(date))
+  },[])
 
   const focusAppointment = (id) => {
     setActiveAppointment(id)
   }
   const handleDateChange = (date) => {
     setDate(date)
+    console.log(date)
+    dispatch(getAvailableAppointment(date))
   }
   
   const bookAppointment = () => {
@@ -110,7 +118,7 @@ function Appointment() {
               <Button variant='secondary-btn' onClick={bookAppointment}>Book Appointment</Button>
             </Flex>
             {
-              appointments.map(appointment => <AppointmentSlot appointment={appointment} key={appointment.id} handleClick={focusAppointment} active={activeAppointment}/>)
+              appointments && appointments.results.map(appointment => <AppointmentSlot appointment={appointment} key={appointment._id} handleClick={focusAppointment} active={activeAppointment}/>)
             }
           </Box>
         </Flex>

@@ -5,7 +5,11 @@ const createAvailableAppointment = async (req,res) => {
     const user = req.user
     if(user.role === 'admin'){
         try{
-            const appointment = await AvailableAppointment.create(req.body)
+            const appointmentBody = {
+                ...req.body,
+                date: new Date(req.body.date).toLocaleDateString()
+            }
+            const appointment = await AvailableAppointment.create(appointmentBody)
             res.status(201).json({
                 message: 'success',
                 results: appointment
@@ -22,11 +26,39 @@ const createAvailableAppointment = async (req,res) => {
     }
 }
 
+const dummyAppointments = [
+    {
+        _id: '687eeb9',
+        doctor: 'Dr. John',
+        timeslot: '9AM-10AM',
+        space: '2',
+        price: 800,
+        date: new Date()
+    },
+    {
+        _id: '617bdb9',
+        doctor: 'Dr. Jane',
+        timeslot: '10AM-11AM',
+        space: '5',
+        price: 500,
+        date: new Date()
+    },
+    {
+        _id: '129eBxN',
+        doctor: 'Dr. Mary',
+        timeslot: '9AM-10AM',
+        space: '2',
+        price: 800,
+        date: new Date()
+    },
+]
+
 const getAllAppointments = async (req,res) => {
-    const appointments = await AvailableAppointment.find()
-    res.status(200).json({
+    const selectedDate = req.query.date
+    const appointments = await AvailableAppointment.find({date: new Date(selectedDate).toLocaleDateString()})
+    return res.status(200).json({
         message: 'success',
-        results: appointments
+        results: dummyAppointments.concat(appointments)
     })
 }
 

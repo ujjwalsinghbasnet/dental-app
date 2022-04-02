@@ -8,8 +8,13 @@ const initialState = {
     message: ''
 }
 
-export const getUserAppointments = createAsyncThunk('appointment/getapp', async () => {
-
+export const getUserAppointments = createAsyncThunk('appointment/getapp', async (token,thunkData) => {
+    try{
+        const appointment = await fetchServices.retrieveUserAppointments(token)
+        return appointment
+    } catch(err) {
+        return thunkData.rejectWithValue(err?.message || 'error occurred')
+    }
 })
 
 export const scheduleUserAppointment = createAsyncThunk('appointment/schedule', async (data,thunkData) => {
@@ -33,10 +38,25 @@ const appointmentSlice = createSlice({
                 state.isLoading = true
             })
             .addCase(scheduleUserAppointment.fulfilled, (state,action) => {
-                console.log(action.payload)
+                // state.appointment.concat(action.payload)
+                state.isLoading = false
+                state.isSuccess = true
             })
             .addCase(scheduleUserAppointment.rejected, (state,action) => {
-
+                state.isLoading = false
+                state.isSuccess = false
+            })
+            .addCase(getUserAppointments.pending, (state,action) => {
+                state.isLoading = true
+            })
+            .addCase(getUserAppointments.fulfilled, (state,action) => {
+                state.appointment = state.appointment.concat(action.payload)
+                state.isLoading = false
+                state.isSuccess = true
+            })
+            .addCase(getUserAppointments.rejected, (state,action) => {
+                state.isSuccess = false
+                state.isLoading = false
             })
     }
 })

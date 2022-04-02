@@ -1,6 +1,26 @@
 const AvailableAppointment = require('../models/availableAppointments')
-const mongoose = require('mongoose')
 
+
+const createAvailableAppointment = async (req,res) => {
+    const user = req.user
+    if(user.role === 'admin'){
+        try{
+            const appointment = await AvailableAppointment.create(req.body)
+            res.status(201).json({
+                message: 'success',
+                results: appointment
+            });
+        } catch(error){
+            res.status(400).json({
+                message: error.message
+            });
+        }
+    } else {
+        return res.status(503).json({
+            message: 'Not authorized'
+        })
+    }
+}
 
 const getAllAppointments = async (req,res) => {
     const appointments = await AvailableAppointment.find()
@@ -29,6 +49,7 @@ const deleteAvailableSlot = async (req,res) => {
 
 
 module.exports = {
+    createAvailableAppointment,
     getAllAppointments,
     updateSpace,
     deleteAvailableSlot

@@ -9,13 +9,13 @@ router
     .post(verifyUser,appointmentController.scheduleAppointment)
 
 router
+    .route('/user')
+    .get(verifyUser,appointmentController.getAppointmentByUser)
+
+router
     .route('/:id')
     .get(appointmentController.getSingleAppointment)
     .put(appointmentController.updateAppointment)
     .delete(appointmentController.deleteAppointment)
-
-router
-    .route(verifyUser,'/user/:userid')
-    .get(appointmentController.getAppointmentByUser)
 
 module.exports = router;

@@ -78,18 +78,17 @@ const updateAppointment = async (req, res) => {
   //get appointment by user
   
   const getAppointmentByUser = async (req, res) => {
-    const id = req.params.userid
     const user = req.user
-    if(user.role === 'admin' || user.id === id){
-        const appointment = await Appointment.findOne({user:id});  
-        return res.status(200).json({
+    try{
+        const appointment = await Appointment.find({user:user.id});  
+        res.status(200).json({
             message: 'success',
             results: appointment
         });
-    } else {
-        res.status(503).json({
-            message: 'Not authorized!'
-        })
+    } catch(error){
+        res.json({
+            message: error.message,
+        });
     }
   }
 

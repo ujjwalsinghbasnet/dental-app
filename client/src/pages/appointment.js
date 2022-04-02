@@ -30,7 +30,7 @@ function Appointment() {
   const navigate = useNavigate()
   const toast = useToast()
 
-  const appointments = useSelector(state => state.appointment.availableAppointment)
+  const appointments = useSelector(state => state.appointment.availableAppointment) || { results: [] }
   const [activeAppointment,setActiveAppointment] = useState(null)
   const [date, setDate] = useState(new Date())
   const user = JSON.parse(localStorage.getItem('dental_user'))
@@ -44,7 +44,6 @@ function Appointment() {
   }
   const handleDateChange = (date) => {
     setDate(date)
-    console.log(date)
     dispatch(getAvailableAppointment(date))
   }
   
@@ -58,7 +57,7 @@ function Appointment() {
         isClosable: true,
       })
     } else {
-      const selectedAppointment = appointments.filter(appointment => appointment.id === activeAppointment)[0]
+      const selectedAppointment = appointments.results && appointments.results.filter(appointment => appointment._id === activeAppointment)[0]
       const toBook = {
         date,
         timeslot: selectedAppointment.timeslot,
@@ -118,7 +117,7 @@ function Appointment() {
               <Button variant='secondary-btn' onClick={bookAppointment}>Book Appointment</Button>
             </Flex>
             {
-              appointments && appointments.results.map(appointment => <AppointmentSlot appointment={appointment} key={appointment._id} handleClick={focusAppointment} active={activeAppointment}/>)
+              appointments.results && appointments.results.map(appointment => <AppointmentSlot appointment={appointment} key={appointment._id} handleClick={focusAppointment} active={activeAppointment}/>)
             }
           </Box>
         </Flex>

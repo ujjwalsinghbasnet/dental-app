@@ -1,5 +1,5 @@
 import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
-import authService from "./services";
+import fetchServices from "./services";
 
 const user = JSON.parse(localStorage.getItem('dental_user'))
 
@@ -12,7 +12,7 @@ const initialState = {
 
 export const register = createAsyncThunk('auth/register', async (userData, thunkData) => {
     try{
-        const user = await authService.register(userData)
+        const user = await fetchServices.register(userData)
         console.log(user)
         return user;
     } catch (err) {
@@ -21,7 +21,7 @@ export const register = createAsyncThunk('auth/register', async (userData, thunk
 })
 export const login = createAsyncThunk('auth/login', async (userData, thunkData) => {
     try{
-        const userResponse = await authService.login(userData)
+        const userResponse = await fetchServices.login(userData)
         const { token, user} = userResponse.data
         let isAdmin = false
         if(user?.role === 'admin') { isAdmin = true }

@@ -1,19 +1,23 @@
 import React, {useState} from 'react'
 import { Box, Button, Flex, Heading,useToast } from '@chakra-ui/react'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+
 import NavResponsive from '../components/NavResponsive'
 import Calendar from '../components/Calendar'
 import AppointmentSlot from '../components/Appointment/AppointmentSlot'
+import { scheduleUserAppointment } from '../features/appointmentSlice'
 
 const appointments = [
   {
     id: 1,
-    time: '9AM-10AM',
+    timeslot: '9AM-10AM',
     doctor: 'Dr. John Doe',
     space: 2
   },
   {
     id: 2,
-    time: '9AM-10AM',
+    timeslot: '9AM-10AM',
     doctor: 'Dr. John Doe',
     space: 2
   }
@@ -21,16 +25,19 @@ const appointments = [
 
 function Appointment() {
 
+  // const appointments = useSelector(state => state.appointment)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [activeAppointment,setActiveAppointment] = useState(null)
   const [date, setDate] = useState(new Date())
   const toast = useToast()
+  const user = JSON.parse(localStorage.getItem('dental_user'))
 
   const focusAppointment = (id) => {
     setActiveAppointment(id)
   }
   const handleDateChange = (date) => {
     setDate(date)
-    console.log(date.toLocaleDateString())
   }
   
   const bookAppointment = () => {
@@ -44,7 +51,23 @@ function Appointment() {
       })
     } else {
       const selectedAppointment = appointments.filter(appointment => appointment.id === activeAppointment)[0]
-      console.log(selectedAppointment)
+      const toBook = {
+        date,
+        timeslot: selectedAppointment.timeslot,
+        doctor: selectedAppointment.doctor,
+      }
+      dispatch(scheduleUserAppointment({toBook,token: user.token})).then(() => {
+        toast({
+          title: 'Done',
+          description: 'appointment booked successfully',
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+        })
+        setTimeout(() => {
+          navigate('/user/appointments', { replace: true })
+        }, 3000)
+      })
     }
   }
 

@@ -3,7 +3,7 @@ const { ObjectId } = require('mongoose').Types
 
 const getAllAppointments = async (req,res) => {
     
-    if(req.user.role === 'admin'){
+    // if(req.user.role === 'admin'){
         const limit = req.query.limit
         const filter = req.query.filter
         let appointments;
@@ -19,11 +19,11 @@ const getAllAppointments = async (req,res) => {
             message: 'success',
             results: appointments
         })
-    } else {
-        res.status(503).json({
-            message: 'Not Authorized'
-        })
-    }
+    // } else {
+    //     res.status(503).json({
+    //         message: 'Not Authorized'
+        // })
+    // }
 }
 
 const getSingleAppointment = async (req,res) => {
@@ -42,9 +42,10 @@ const getSingleAppointment = async (req,res) => {
 }
 
 const scheduleAppointment = async (req,res) => {
+    const user = req.user
     const userAppointment = {
         ...req.body,
-        user: ObjectId(req.body.user._id)
+        user: ObjectId(user.id)
     }
     try{
         const appointment = await Appointment.create(userAppointment)
@@ -78,11 +79,18 @@ const updateAppointment = async (req, res) => {
   
   const getAppointmentByUser = async (req, res) => {
     const id = req.params.userid
-    const appointment = await Appointment.findOne({user:id});  
-    res.status(200).json({
-        message: 'success',
-        results: appointment
-    });
+    const user = req.user
+    if(user.role === 'admin' || user.id === id){
+        const appointment = await Appointment.findOne({user:id});  
+        return res.status(200).json({
+            message: 'success',
+            results: appointment
+        });
+    } else {
+        res.status(503).json({
+            message: 'Not authorized!'
+        })
+    }
   }
 
 module.exports = {

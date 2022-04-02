@@ -5,8 +5,8 @@ const router = express.Router()
 
 router
     .route('/')
-    .get(verifyUser, appointmentController.getAllAppointments)
-    .post(appointmentController.scheduleAppointment)
+    .get(appointmentController.getAllAppointments) //verifyUser
+    .post(verifyUser,appointmentController.scheduleAppointment)
 
 router
     .route('/:id')
@@ -15,7 +15,7 @@ router
     .delete(appointmentController.deleteAppointment)
 
 router
-    .route('/user/:userid')
+    .route(verifyUser,'/user/:userid')
     .get(appointmentController.getAppointmentByUser)
 
 module.exports = router;

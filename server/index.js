@@ -3,6 +3,7 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 const userRouter = require('./routers/userRouter')
 const appointmentRouter = require('./routers/appointmentRouter')
+const availableAppointmentRouter = require('./routers/availableAppointmentRouter')
 
 const app = express()
 app.use(express.json())
@@ -18,6 +19,7 @@ try{
 
 app.use('/api/users', userRouter)
 app.use('/api/appointments', appointmentRouter)
+app.use('/api/available-appointments', availableAppointmentRouter)
 
 app.all('*', (req,res) => {
     res.status(404).json({ message: 'Not Found' })

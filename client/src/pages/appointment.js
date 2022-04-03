@@ -8,24 +8,8 @@ import Calendar from '../components/Calendar'
 import AppointmentSlot from '../components/Appointment/AppointmentSlot'
 import { getAvailableAppointment, scheduleUserAppointment } from '../features/appointmentSlice'
 
-// const appointments = [
-//   {
-//     id: 1,
-//     timeslot: '9AM-10AM',
-//     doctor: 'Dr. John Doe',
-//     space: 2
-//   },
-//   {
-//     id: 2,
-//     timeslot: '9AM-10AM',
-//     doctor: 'Dr. John Doe',
-//     space: 2
-//   }
-// ] 
-
 function Appointment() {
 
-  // const appointments = useSelector(state => state.appointment)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const toast = useToast()

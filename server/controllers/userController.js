@@ -1,5 +1,5 @@
 const User = require('../models/user');
-const mongoose = require('mongoose');
+const { ObjectId } = require('mongoose').Types;
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -95,10 +95,34 @@ const login = async (req,res) => {
     }
 }
 
+const changeDetails = async (req,res) => {
+    const id = req.params.id.trim()
+    
+    if(!ObjectId.isValid(id)){
+        return res.json({
+            message: "invalid user id"
+        })
+    } else {
+        const { phone, address } = req.body
+        try{
+            const userUpdate = await User.updateOne({_id: id}, { phone, address }, {new: true, runValidators: true})
+            res.status(201).json({
+                message: 'success',
+                results: userUpdate
+            })
+        } catch (error) {
+            res.json({
+                message: error.message
+            })
+        }
+    }
+}
+
 module.exports = {
     getAllUsers,
     getSingleUser,
     signup,
     getUserByEmail,
-    login
+    login,
+    changeDetails
   }

@@ -13,5 +13,9 @@ router
     .route('/login')
     .post(userController.login)
 
+router
+    .route('/:id')
+    .put(userController.changeDetails)
+
 
 module.exports = router;

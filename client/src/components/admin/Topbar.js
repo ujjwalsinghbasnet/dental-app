@@ -6,10 +6,24 @@ import {
     Avatar,
     Box
 } from '@chakra-ui/react'
+import { useSelector } from 'react-redux'
 import { GiHamburgerMenu } from 'react-icons/gi'
 
 
 function Topbar({ title, closeSidebar }) {
+    const user = useSelector(state => state.auth && state.auth.user.user)
+
+    const greet = () => {
+        const hrs = new Date().getHours()
+        if(hrs < 12){
+            return 'Good Morning,'
+        } else if(hrs >= 12 && hrs <=17){
+            return 'Good Afternoon,'
+        } else {
+            return 'Good Evening'
+        }
+    }
+
   return (
     <Box>
         <Flex
@@ -24,8 +38,8 @@ function Topbar({ title, closeSidebar }) {
             </Flex>
             <Flex h='100%' align={'center'}>
                 <Text fontSize={{ base: '0.8rem', sm: '0.8rem', md: '0.9rem', lg:'1rem' }} mr='1rem' display={{ base: 'none', sm: 'block', md: 'block', lg: 'block'}}>
-                    <span>Good Morning,</span><br />
-                    Ujjwal Singh Basnet
+                    <span>{greet()}</span><br />
+                    {user.name}
                 </Text>
                 <Avatar size='lg' name='Christian Nwamba' src='https://bit.ly/code-beast' />
             </Flex>

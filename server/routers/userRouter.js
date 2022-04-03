@@ -14,6 +14,10 @@ router
     .post(userController.login)
 
 router
+    .route('/password/:id')
+    .put(userController.changePassword)
+
+router
     .route('/:id')
     .put(userController.changeDetails)
 

@@ -96,9 +96,9 @@ const login = async (req,res) => {
 }
 
 const changeDetails = async (req,res) => {
-    const id = req.params.id.trim()
+    const id = req.params.id.trim() //remove any unnecessary blank spaces before or after id parameter in url
     
-    if(!ObjectId.isValid(id)){
+    if(!ObjectId.isValid(id)){ //check if the provided id is valid object id
         return res.json({
             message: "invalid user id"
         })
@@ -118,11 +118,66 @@ const changeDetails = async (req,res) => {
     }
 }
 
+const changePassword = async (req,res) => {
+    const id = req.params.id.trim()
+
+    if(!ObjectId.isValid(id)){
+        return res.json({
+            message: "invalid user id"
+        })
+    } else {
+        const userExists = await User.findOne({ _id: id })
+        if(!userExists){ //check if the user with given id exists -> return 404 if not found
+            return res.status(404).json({
+                message: 'user not found'
+            })
+        } else {
+            const hash = userExists.password //get the old password from existing user document
+            const { old_password, new_password } = req.body
+            bcrypt.compare(old_password,hash, (err,result) => { //comparing if existing password match old password
+                if(err){
+                    return res.json({
+                        message: err.message
+                    })
+                }
+                if(result){
+                    bcrypt.genSalt(12, (err,salt) => { //if old password matched -> generate hash of new password
+                        if(!err){
+                            bcrypt.hash(new_password,salt, (err, hash) => {
+                                if(err){
+                                    return res.json({
+                                        message: err.message
+                                    })
+                                }
+                                if(hash){ //hashing successfull -> update the user with provided id
+                                    User.updateOne({_id: id}, { password: hash }, {new: true, runValidators: true}).then(doc => {
+                                        res.status(201).json({
+                                            message: 'success'
+                                        })
+                                    })
+                                }
+                            })
+                        } else {
+                            res.json({
+                                message: err.message || 'Error occurred in hashing'
+                            })
+                        }
+                    })
+                } else {
+                    res.status(403).json({message: "Password mismatched!"}) //if compare function results false -> password mismatched
+                }
+            })
+        }
+
+    }
+}
+
 module.exports = {
     getAllUsers,
     getSingleUser,
     signup,
     getUserByEmail,
     login,
-    changeDetails
+    changeDetails,
+    changePassword
   }

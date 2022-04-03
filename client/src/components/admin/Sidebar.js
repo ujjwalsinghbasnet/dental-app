@@ -11,7 +11,6 @@ import { FiLogOut } from 'react-icons/fi'
 import { NavLink } from 'react-router-dom'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { useDispatch } from 'react-redux'
-import authService from '../../features/services'
 import { reset } from '../../features/authSlice'
 import { useNavigate } from 'react-router-dom'
 
@@ -37,7 +36,6 @@ function Sidebar({ closeSidebar, isOpen,menu }) {
     },[])
 
     const logoutUser = () => {
-        authService.logout()
         dispatch(reset())
         navigate('/', {replace:true})
     }

@@ -36,6 +36,22 @@ export const login = createAsyncThunk('auth/login', async (userData, thunkData) 
         return thunkData.rejectWithValue({ message: "error"})
     }
 })
+export const changeDetails = createAsyncThunk('auth/change_details', async (data,thunkData) => {
+    try{
+        const user = await fetchServices.changeDetails(data)
+        return user
+    } catch(err){
+        return thunkData.rejectWithValue({message: err.message})
+    }
+})
+export const changePassword = createAsyncThunk('auth/change_password', async (data,thunkData) => {
+    try{
+        const user = await fetchServices.changePassword(data)
+        return user
+    } catch(err){
+        return thunkData.rejectWithValue({ message: err.message })
+    }
+})
 
 export const authSlice = createSlice({
     name: 'auth',
@@ -61,6 +77,7 @@ export const authSlice = createSlice({
             .addCase(getInitialLoggedInUser.rejected, (state,action) => {
                 state.isLoading=false
                 state.isSuccess=false
+                state.message = action.payload
             })
             .addCase(register.pending, (state,action) => {
                 state.isLoading = true
@@ -86,7 +103,33 @@ export const authSlice = createSlice({
             .addCase(login.rejected, (state,action) => {
                 state.isLoading = false
                 state.isSuccess = false
-                state.user = action.payload
+                state.message = action.payload
+            })
+            .addCase(changeDetails.pending, (state,action) => {
+                state.isLoading = true
+            })
+            .addCase(changeDetails.fulfilled, (state,action) => {
+                state.isLoading = false
+                state.user.user = action.payload
+                state.isSuccess = true
+            })
+            .addCase(changeDetails.rejected, (state,action) => {
+                state.isLoading = false
+                state.isSuccess=false
+                state.message = action.payload
+            })
+            .addCase(changePassword.pending, (state,action) => {
+                state.isLoading = true
+            })
+            .addCase(changePassword.fulfilled, (state,action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.user = null
+            })
+            .addCase(changePassword.rejected, (state,action) => {
+                state.isLoading = false
+                state.isSuccess = false
+                state.message = action.payload
             })
     }
 })

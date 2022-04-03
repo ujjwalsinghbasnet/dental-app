@@ -19,6 +19,7 @@ router
 
 router
     .route('/:id')
+    .get(userController.getSingleUser)
     .put(userController.changeDetails)
 
 

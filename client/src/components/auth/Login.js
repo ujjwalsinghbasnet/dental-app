@@ -49,10 +49,20 @@ function Login() {
       })
     } else {
       dispatch(login(info)).then((res) => {
-        if(location.state?.from){
-          navigate(location.state.from, {replace: true})
+        if(res.hasOwnProperty('error')){
+          toast({
+            title: res.payload.message,
+            description: 'password or email mismatched',
+            status: 'error',
+            duration: 3000,
+            isClosable: true,
+          })
         } else {
-          navigate('/', { replace: true })
+          if(location.state?.from){
+            navigate(location.state.from, {replace: true})
+          } else {
+            navigate('/', { replace: true })
+          }
         }
       })
     }

@@ -14,14 +14,16 @@ const login = async (formData) => {
 }
 
 
-const changePassword = async (id) => {
-    const user = await axios.put(API_URL + `users/password/:${id}`)
+const changePassword = async (data) => {
+    const user = await axios.put(API_URL + `users/password/${data.id}`, data.passwords)
+    console.log(user)
     return user.data
 }
 
-const changeDetails = async (id) => {
-    const user = await axios.put(API_URL + `users/:${id}`)
-    return user.data
+const changeDetails = async (data) => {
+    const update = await axios.put(API_URL + `users/${data.id}`, data.info)
+    const user = await axios.get(API_URL + `users/${data.id}`)
+    return user.data.results
 }
 //user related information retrieved
 

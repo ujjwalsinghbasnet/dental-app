@@ -14,11 +14,18 @@ const getAllUsers = async (req,res) => {
 }
 
 const getSingleUser = async (req,res) => {
-    const user = await User.findById(req.params.id);
-    res.status(200).json({
-        message: 'success',
-        results: user
-    })
+    const id = req.params.id.trim()
+    if(!ObjectId.isValid(id)){
+        return res.status(503).json({
+            message: 'invalid user id'
+        })
+    } else {
+        const user = await User.findById(req.params.id).select('-password');
+        res.status(200).json({
+            message: 'success',
+            results: user
+        })
+    }
 }
 const getUserByEmail = async (req, res) => {
     const user = await User.findOne({email:req.params.email});  
@@ -98,7 +105,6 @@ const login = async (req,res) => {
 
 const changeDetails = async (req,res) => {
     const id = req.params.id.trim() //remove any unnecessary blank spaces before or after id parameter in url
-    
     if(!ObjectId.isValid(id)){ //check if the provided id is valid object id
         return res.json({
             message: "invalid user id"
@@ -123,7 +129,7 @@ const changePassword = async (req,res) => {
     const id = req.params.id.trim()
 
     if(!ObjectId.isValid(id)){
-        return res.json({
+        return res.status(503).json({
             message: "invalid user id"
         })
     } else {

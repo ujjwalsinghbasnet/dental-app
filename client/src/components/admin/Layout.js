@@ -6,6 +6,7 @@ import {
 import Sidebar from './Sidebar'
 import Topbar from './Topbar'
 import { useLocation } from 'react-router-dom'
+import useWidthSidebar from '../../hooks/useWidthSidebar'
 
 const adminNav = [
     {
@@ -42,6 +43,7 @@ function Layout({ children, title }) {
     const [toggle,setToggle] = useState(true)
     const [nav,setNav] = useState(null)
     const location = useLocation()
+    const pos = useWidthSidebar() //custom hook
 
     useEffect(() => {
         if(location.pathname.startsWith('/admin')){
@@ -52,6 +54,11 @@ function Layout({ children, title }) {
     },[location.pathname])
 
     const closeSidebar = () => { setToggle(state => !state) }
+    const {md,lg} = {
+        md: !pos && toggle ? '30rem' : '0',
+        lg: !pos && toggle ? '20%' : '0',
+    }
+
   return (
     <Flex
         w='100%'
@@ -65,6 +72,7 @@ function Layout({ children, title }) {
             px='2rem'
             pt='1rem'
             w='100%'
+            ml={{md: md, lg: lg}} //base: '0rem', sm: '0rem',
         >
             <Topbar title={title} closeSidebar={closeSidebar} />
             {children}

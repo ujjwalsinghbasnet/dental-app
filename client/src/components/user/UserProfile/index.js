@@ -125,7 +125,7 @@ function UserProfile() {
             align='center'
         >
             <Avatar size='2xl' name='Ujjwal Basnet' src='https://bit.ly/code-beast' />
-            <Heading as='h2' fontSize={{base: '0.9rem', sm: '1rem', md: '1rem', lg: '1.5rem'}} mt='1rem'>Ujjwal Singh Basnet</Heading>
+            <Heading as='h2' fontSize={{base: '0.9rem', sm: '1rem', md: '1rem', lg: '1.5rem'}} mt='1rem'>{user?.name}</Heading>
             <Text fontSize={{base: '0.9rem', sm: '0.9rem', md: '1rem', lg: '1rem'}} color='#b5b4b4'>myemail@gmail.com</Text>
             <Box
               w={{base: '100%', sm: '80%', md: '50%', lg: '50%'}}

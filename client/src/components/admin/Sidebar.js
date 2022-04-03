@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react'
+import React from 'react'
 import {
     Box,
     Flex,
@@ -13,27 +13,12 @@ import { GiHamburgerMenu } from 'react-icons/gi'
 import { useDispatch } from 'react-redux'
 import { reset } from '../../features/authSlice'
 import { useNavigate } from 'react-router-dom'
+import useWidthSidebar from '../../hooks/useWidthSidebar'
 
 function Sidebar({ closeSidebar, isOpen,menu }) {
-    const [pos,setPos] = useState(false)
+    const pos = useWidthSidebar()
     const dispatch = useDispatch()
     const navigate = useNavigate()
-
-    useEffect(() => {
-        if(window.innerWidth <= 975){
-            setPos(true)
-        }
-        window.addEventListener('resize', () => {
-            if(window.innerWidth <= 975){
-                setPos(true)
-            } else {
-                setPos(false)
-            }
-        })
-        return () => {
-            window.removeEventListener('resize', null)
-        }
-    },[])
 
     const logoutUser = () => {
         dispatch(reset())
@@ -46,9 +31,10 @@ function Sidebar({ closeSidebar, isOpen,menu }) {
         width={{base: '20rem', sm: '20rem', md: '30rem', lg: '20%'}}
         color='white'
         p={'1rem'}
-        height='100vh'
+        height='100%'
+        minH='100vh'
         display={isOpen ? 'block': 'none'}
-        position ={ pos ? 'absolute' : ''}
+        position ={ pos ? 'absolute' : 'fixed'}
         zIndex='2'
         backdropFilter={'blur(5px)'}
     >

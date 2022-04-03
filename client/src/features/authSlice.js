@@ -1,14 +1,19 @@
 import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 import fetchServices from "./services";
 
-const user = JSON.parse(localStorage.getItem('dental_user'))
+
 
 const initialState = {
-    user: user ? user : null,
+    user: null,
     isLoading: false,
     isSuccess: false,
     message: ''
 }
+
+export const getInitialLoggedInUser = createAsyncThunk('auth/getLoggedInUser', async () => {
+    const user = JSON.parse(localStorage.getItem('dental_user'))
+    return user
+})
 
 export const register = createAsyncThunk('auth/register', async (userData, thunkData) => {
     try{
@@ -25,8 +30,8 @@ export const login = createAsyncThunk('auth/login', async (userData, thunkData) 
         const { token, user} = userResponse.data
         let isAdmin = false
         if(user?.role === 'admin') { isAdmin = true }
-        localStorage.setItem('dental_user',JSON.stringify({ token, isAdmin }))
-        return user.data;
+        localStorage.setItem('dental_user',JSON.stringify({ token, isAdmin, user }))
+        return userResponse.data;
     } catch (err) {
         return thunkData.rejectWithValue({ message: "error"})
     }
@@ -40,10 +45,23 @@ export const authSlice = createSlice({
             state.isLoading = false
             state.isSuccess = false
             state.user = null
+            localStorage.removeItem('dental_user')
         }
     },
     extraReducers: (builder) => {
         builder
+            .addCase(getInitialLoggedInUser.pending, (state,action) => {
+                state.isLoading = true
+            })
+            .addCase(getInitialLoggedInUser.fulfilled, (state,action) => {
+                state.isLoading=false
+                state.isSuccess=true
+                state.user = action.payload
+            })
+            .addCase(getInitialLoggedInUser.rejected, (state,action) => {
+                state.isLoading=false
+                state.isSuccess=false
+            })
             .addCase(register.pending, (state,action) => {
                 state.isLoading = true
             })

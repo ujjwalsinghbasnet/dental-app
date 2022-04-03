@@ -49,7 +49,6 @@ function Login() {
       })
     } else {
       dispatch(login(info)).then((res) => {
-        console.log(res)
         if(location.state?.from){
           navigate(location.state.from, {replace: true})
         } else {

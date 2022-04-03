@@ -7,7 +7,9 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import theme from './theme'
 import { store } from './store'
 import { Provider } from 'react-redux'
-console.log(theme.config.initialColorMode)
+import { getInitialLoggedInUser } from './features/authSlice';
+
+store.dispatch(getInitialLoggedInUser())
 
 
 ReactDOM.render(

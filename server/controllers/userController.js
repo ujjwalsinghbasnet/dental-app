@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 
 const getAllUsers = async (req,res) => {
     const users = await User.find()
-    const patients = users.filter(singlePatient => singlePatient.role === 'patient')
+    const patients = users.filter(singlePatient => singlePatient.role === 'patient') //do not show admin as users
     res.status(200).json({
         message: 'success',
         results: patients
@@ -80,7 +80,8 @@ const login = async (req,res) => {
                     name: userExists.name,
                     gender: userExists.gender,
                     email: userExists.email,
-                    phone: userExists.phone
+                    phone: userExists.phone,
+                    address: userExists?.address
                 }
                 const token = jwt.sign(user,'this#isseckj83u09qjer')
                 req.user = token

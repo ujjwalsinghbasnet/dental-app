@@ -13,8 +13,15 @@ const login = async (formData) => {
     return user
 }
 
-const logout = () => {
-    localStorage.removeItem('dental_user')
+
+const changePassword = async (id) => {
+    const user = await axios.put(API_URL + `users/password/:${id}`)
+    return user.data
+}
+
+const changeDetails = async (id) => {
+    const user = await axios.put(API_URL + `users/:${id}`)
+    return user.data
 }
 //user related information retrieved
 
@@ -48,7 +55,8 @@ const retrieveAvailableAppointment = async (date) => {
 const fetchServices = {
     register,
     login,
-    logout,
+    changePassword,
+    changeDetails,
     retrieveUserAppointments,
     scheduleAppointment,
     retrieveAvailableAppointment

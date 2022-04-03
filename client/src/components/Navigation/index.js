@@ -4,7 +4,6 @@ import {
     Button,
     Flex
 } from '@chakra-ui/react'
-import authService from '../../features/services';
 import { useDispatch } from 'react-redux';
 import { reset } from '../../features/authSlice'
 import { useNavigate } from 'react-router-dom'
@@ -33,7 +32,6 @@ function Navigation() {
   },[setIsLoggedIn])
 
   const logoutUser = () => {
-    authService.logout()
     dispatch(reset())
     navigate('/', {replace:true})
     setIsLoggedIn(false)

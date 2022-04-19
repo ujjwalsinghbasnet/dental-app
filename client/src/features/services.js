@@ -45,6 +45,12 @@ const scheduleAppointment = async (data) => {
     })
     return appointment.data
 }
+
+const getScheduledAppointments = async(date) => {
+    const appointment = await axios.get(API_URL + `appointments`)
+
+    return appointment.data
+}
 //appointment related information
 
 //available-appointments
@@ -61,7 +67,8 @@ const fetchServices = {
     changeDetails,
     retrieveUserAppointments,
     scheduleAppointment,
-    retrieveAvailableAppointment
+    retrieveAvailableAppointment,
+    getScheduledAppointments
 }
 
 export default fetchServices

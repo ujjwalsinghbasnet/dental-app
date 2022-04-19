@@ -10,12 +10,14 @@ import { useNavigate } from 'react-router-dom'
 
 function Navigation() {
   const [fixNav,setFixNav] = useState(false)
+  const [admin,setAdmin] = useState(null)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('dental_user'))
+    setAdmin(user?.isAdmin)
     if(user){
       setIsLoggedIn(true)
     }
@@ -82,7 +84,9 @@ function Navigation() {
                 color='primary'
                 justify='end'
               >
-                <NavLink to='/user/profile'>Profile</NavLink>
+                <NavLink to={admin ? '/admin' : '/user/profile'}>{
+                  admin ? 'Dashboard' : 'Profile'
+                }</NavLink>
                 <Button variant='primary-btn'  ml='2rem' onClick={logoutUser}>
                     Logout
                 </Button>

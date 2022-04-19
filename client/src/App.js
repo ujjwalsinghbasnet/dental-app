@@ -11,6 +11,7 @@ import Schedules from './pages/admin/schedules';
 import ProtectedRoute from './components/ProtectedRoute';
 import UserProfile from './components/user/UserProfile';
 import UserAppointment from './components/user/UserAppointment';
+import Appointments from './pages/admin/appointments';
 
 function App() {
   return (
@@ -35,6 +36,11 @@ function App() {
         <Route path='/admin/doctors' element={
           <ProtectedRoute>
             <Doctors />
+          </ProtectedRoute>
+        }/>
+        <Route path='/admin/appointments' element={
+          <ProtectedRoute>
+            <Appointments />
           </ProtectedRoute>
         }/>
         <Route path='/admin/schedules' element={

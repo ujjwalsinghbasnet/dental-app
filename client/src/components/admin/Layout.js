@@ -21,6 +21,11 @@ const adminNav = [
         link: '/admin/doctors',
         text: 'Doctors'
     },
+    
+    {
+        link: '/admin/appointments',
+        text: 'Appointments'
+    },
     {
         link: '/admin/schedules',
         text: 'Schedules'

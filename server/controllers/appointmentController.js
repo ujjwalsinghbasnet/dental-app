@@ -4,13 +4,16 @@ const { ObjectId } = require('mongoose').Types
 const getAllAppointments = async (req,res) => {
     
     // if(req.user.role === 'admin'){
-        const limit = req.query.limit
-        const filter = req.query.filter
+        const page_number = req.query.page
+        const limit = page_number ? 4 : null
+        const skip = (page_number -1) * limit || 0
+        const date = req.query.date
         let appointments;
+
         if(limit){
-            appointments = await Appointment.find().sort({ createdAt: -1 }).limit(parseInt(limit)).populate('user','name phone')
-        } else if(filter){
-            appointments = await Appointment.find({ date: { $in: [filter]}}).sort({ createdAt: -1 }).populate('user','name phone')
+            appointments = await Appointment.find().sort({ createdAt: -1 }).limit(parseInt(limit)).skip(skip).populate('user','name phone')
+        } else if(date){
+            appointments = await Appointment.find({ date: { $in: [date]}}).sort({ createdAt: -1 }).populate('user','name phone')
         } else {
             appointments = await Appointment.find().sort({ createdAt: -1 }).populate('user','name phone')
         }

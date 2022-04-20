@@ -1,5 +1,5 @@
 import { Box, Flex, Heading } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Layout from '../../components/admin/Layout'
 import AppointmentSlot from '../../components/Appointment/AppointmentSlot'
@@ -14,9 +14,13 @@ const Appointments = () => {
     const [date,setDate] = useState(new Date())
     const [activeAppointment,setActiveAppointment] = useState(null)
 
+    useEffect(() => {
+        dispatch(getBookedAppointments(date))
+    })
+    
     const focusAppointment = (id) => {
         setActiveAppointment(id)
-      }
+    }
     const handleDateChange = (date) => {
         setDate(date)
         dispatch(getBookedAppointments(date))
@@ -40,7 +44,7 @@ const Appointments = () => {
                 <Heading as='h1' fontSize={{ base: '1rem', sm: '1rem', md: '1.3rem', lg: '1.5rem' }}>Scheduled Appointment</Heading>
                 <Flex mt='2rem' direction={'column'}>
                     {
-                        appointments.results.map((appointment) => <AppointmentSlot appointment={appointment} handleClick={focusAppointment} active={activeAppointment}/>)
+                        appointments.results && appointments.results.map((appointment) => <AppointmentSlot appointment={appointment} handleClick={focusAppointment} active={activeAppointment}/>)
                     }
                 </Flex>
             </Flex>

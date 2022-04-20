@@ -3,6 +3,7 @@ const AvailableAppointment = require('../models/availableAppointments')
 
 const createAvailableAppointment = async (req,res) => {
     const user = req.user
+    console.log(user, req.body)
     if(user.role === 'admin'){
         try{
             const appointmentBody = {
@@ -54,8 +55,8 @@ const dummyAppointments = [
 ]
 
 const getAllAppointments = async (req,res) => {
-    const selectedDate = req.query.date
-    const appointments = await AvailableAppointment.find({date: new Date(selectedDate).toLocaleDateString()})
+    const selectedDate = new Date(req.query.date).toLocaleDateString()
+    const appointments = await AvailableAppointment.find({ date: selectedDate})
     return res.status(200).json({
         message: 'success',
         results: dummyAppointments.concat(appointments)

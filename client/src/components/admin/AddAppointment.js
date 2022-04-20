@@ -1,15 +1,22 @@
-import { Box, Button, Flex, FormControl, FormLabel, Heading, Input, Select } from '@chakra-ui/react'
+import { Box, Button, Flex, FormControl, FormLabel, Heading, Input, Select, useToast } from '@chakra-ui/react'
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { addAppointment } from '../../features/appointmentSlice'
 import Calendar from '../Calendar'
 
 const AddAppointment = ({ handleCancel }) => {
 
     const [date,setDate] = useState(new Date())
+    const dispatch = useDispatch()
+    const toast = useToast()
     const [appointment,setAppointment] = useState({
-        timeSlot: '',
+        timeslot: '',
         doctor: '',
-        availableSpace: ''
+        space: '',
+        price: ''
     })
+  const user = JSON.parse(localStorage.getItem('dental_user'))
+
 
     const handleDateChange = (date) => {
         setDate(date)
@@ -18,7 +25,37 @@ const AddAppointment = ({ handleCancel }) => {
         setAppointment({...appointment, [e.target.id]: e.target.value})
     }
     const submitHandler = () => {
-        console.log({...appointment,date})
+        const { timeslot, doctor, space, price } = appointment
+        if(!timeslot || !doctor || !space || !price){
+            toast({
+                title: 'Error',
+                description: 'All fields required',
+                status: 'error',
+                duration: 3000,
+                isClosable: true,
+            })
+        } else {
+            dispatch(addAppointment({appointment: {timeslot,doctor,space,price,date}, token: user.token})).then( res => {
+                if(res.hasOwnProperty('error')){
+                    toast({
+                      title: res.payload.message,
+                      description: 'something went wrong',
+                      status: 'error',
+                      duration: 3000,
+                      isClosable: true,
+                    })
+                } else {
+                    toast({
+                        title: 'Success',
+                        description: 'successfully added appointment!',
+                        status: 'success',
+                        duration: 3000,
+                        isClosable: true,
+                    })
+                    setTimeout(() => handleCancel(), 2000)
+                }
+            })
+        }
     }
 
   return (
@@ -40,7 +77,6 @@ const AddAppointment = ({ handleCancel }) => {
             background='white'
             p='2rem'
         >
-            {/* onChange={changeHandler} defaultValue={info.phone} */}
             <Flex align={'center'} justify='center'>
                 <Calendar date={date} handleChange={handleDateChange}/>
             </Flex>
@@ -64,11 +100,15 @@ const AddAppointment = ({ handleCancel }) => {
                 </FormControl>
                 <FormControl>
                     <FormLabel htmlFor='timeslot'>Time Slot</FormLabel>
-                    <Input id='timeslot' type='text' defaultValue={appointment.timeSlot} onChange={handleChange}/>
+                    <Input id='timeslot' type='text' defaultValue={appointment.timeslot} onChange={handleChange}/>
                 </FormControl>
                 <FormControl mt='1rem'>
-                    <FormLabel htmlFor='availableSpace'>Available Space</FormLabel>
-                    <Input id='availableSpace' type='text' defaultValue={appointment.availableSpace} onChange={handleChange}/>
+                    <FormLabel htmlFor='space'>Available Space</FormLabel>
+                    <Input id='space' type='text' defaultValue={appointment.availableSpace} onChange={handleChange}/>
+                </FormControl>
+                <FormControl mt='1rem'>
+                    <FormLabel htmlFor='price'>Price</FormLabel>
+                    <Input id='price' type='number' defaultValue={appointment.price} onChange={handleChange}/>
                 </FormControl>
                 <FormControl mt='1rem'>
                     <FormLabel htmlFor='doctor'>Assigned Doctor</FormLabel>

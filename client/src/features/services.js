@@ -60,6 +60,15 @@ const retrieveAvailableAppointment = async (date) => {
     return appointments.data
 }
 
+const addAvailableAppointment = async (data) => {
+    const addedApp = await axios.post(API_URL + 'available-appointments', data.appointment, {
+        headers: {
+            'auth': `Bearer ${data.token}`
+        }
+    } )
+    return addedApp.data
+}
+
 const fetchServices = {
     register,
     login,
@@ -68,7 +77,8 @@ const fetchServices = {
     retrieveUserAppointments,
     scheduleAppointment,
     retrieveAvailableAppointment,
-    getScheduledAppointments
+    getScheduledAppointments,
+    addAvailableAppointment
 }
 
 export default fetchServices

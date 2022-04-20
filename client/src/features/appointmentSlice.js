@@ -26,7 +26,14 @@ export const scheduleUserAppointment = createAsyncThunk('appointment/schedule', 
         return thunkData.rejectWithValue({message: 'error occurred'})
     }
 })
-
+export const addAppointment = createAsyncThunk('appointment/addAppointment', async (data,thunkData) => {
+    try{
+        const addedApp = await fetchServices.addAvailableAppointment(data)
+        return addedApp
+    } catch(error){
+        return thunkData.rejectWithValue({ message: error.message || 'errror on adding slot'})
+    }
+})
 export const getAvailableAppointment = createAsyncThunk('appointment/getAvailableApp', async (date,thunkData) => {
     try{
         const appointments = await fetchServices.retrieveAvailableAppointment(date)
@@ -100,6 +107,19 @@ const appointmentSlice = createSlice({
             .addCase(getBookedAppointments.rejected, (state,action) => {
                 state.isLoading = false
                 state.isSuccess = false
+            })
+            .addCase(addAppointment.pending, (state,action) => {
+                state.isLoading = true;
+            })
+            .addCase(addAppointment.fulfilled, (state,action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.message = 'Successfully Added'
+            })
+            .addCase(addAppointment.rejected, (state,action) => {
+                state.isLoading = false
+                state.isSuccess = false
+                state.message = action.payload
             })
     }
 })

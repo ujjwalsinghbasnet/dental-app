@@ -47,7 +47,7 @@ const scheduleAppointment = async (data) => {
 }
 
 const getScheduledAppointments = async(date) => {
-    const appointment = await axios.get(API_URL + `appointments`)
+    const appointment = await axios.get(API_URL + `appointments/?date=${date}`)
 
     return appointment.data
 }

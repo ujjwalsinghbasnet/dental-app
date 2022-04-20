@@ -20,7 +20,17 @@ function Appointment() {
   const user = JSON.parse(localStorage.getItem('dental_user'))
 
   useEffect(() => {
-    dispatch(getAvailableAppointment(date))
+    dispatch(getAvailableAppointment(date)).then(res => {
+      if(res.hasOwnProperty('error')){
+        toast({
+          title: res.payload.message,
+          description: 'Error on fetching...',
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+        })
+      }
+    })
   },[])
 
   const focusAppointment = (id) => {

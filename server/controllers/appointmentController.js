@@ -7,17 +7,14 @@ const getAllAppointments = async (req,res) => {
         const page_number = req.query.page
         const limit = page_number ? 4 : null
         const skip = (page_number -1) * limit || 0
-        const date = req.query.date
+        const selected_date = new Date(req.query.date).toLocaleDateString()
         let appointments;
 
         if(limit){
-            appointments = await Appointment.find().sort({ createdAt: -1 }).limit(parseInt(limit)).skip(skip).populate('user','name phone')
-        } else if(date){
-            appointments = await Appointment.find({ date: { $in: [date]}}).sort({ createdAt: -1 }).populate('user','name phone')
+            appointments = await Appointment.find({ date: selected_date }).sort({ createdAt: -1 }).limit(parseInt(limit)).skip(skip).populate('user','name phone')
         } else {
-            appointments = await Appointment.find().sort({ createdAt: -1 }).populate('user','name phone')
+            appointments = await Appointment.find({ date: selected_date }).sort({ createdAt: -1 }).populate('user','name phone')
         }
-
         return res.status(200).json({
             message: 'success',
             results: appointments
@@ -48,6 +45,7 @@ const scheduleAppointment = async (req,res) => {
     const user = req.user
     const userAppointment = {
         ...req.body,
+        date: new Date(req.body.date).toLocaleDateString(),
         user: ObjectId(user.id)
     }
     try{

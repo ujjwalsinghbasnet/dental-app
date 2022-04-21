@@ -1,4 +1,5 @@
 const Appointment = require('../models/appointment')
+const AvailableAppointment = require('../models/availableAppointments')
 const { ObjectId } = require('mongoose').Types
 
 const getAllAppointments = async (req,res) => {
@@ -19,10 +20,11 @@ const getAllAppointments = async (req,res) => {
             message: 'success',
             results: appointments
         })
-    // } else {
+    // } 
+    // else {
     //     res.status(503).json({
     //         message: 'Not Authorized'
-        // })
+    //     })
     // }
 }
 
@@ -43,6 +45,7 @@ const getSingleAppointment = async (req,res) => {
 
 const scheduleAppointment = async (req,res) => {
     const user = req.user
+    const {spaceID} = req.body
     const userAppointment = {
         ...req.body,
         date: new Date(req.body.date).toLocaleDateString(),
@@ -50,6 +53,8 @@ const scheduleAppointment = async (req,res) => {
     }
     try{
         const appointment = await Appointment.create(userAppointment)
+        const availableAppointment = await AvailableAppointment.findById(spaceID)
+        await AvailableAppointment.findByIdAndUpdate(spaceID, {space: parseInt(availableAppointment.space) - 1})
         res.status(201).json({
             message: 'success',
             results: appointment

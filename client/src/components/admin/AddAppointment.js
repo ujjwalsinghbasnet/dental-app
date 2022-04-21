@@ -1,7 +1,7 @@
 import { Box, Button, Flex, FormControl, FormLabel, Heading, Input, Select, useToast } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { addAppointment } from '../../features/appointmentSlice'
+import { addAppointment, getAvailableAppointment } from '../../features/appointmentSlice'
 import Calendar from '../Calendar'
 
 const AddAppointment = ({ handleCancel }) => {
@@ -52,6 +52,7 @@ const AddAppointment = ({ handleCancel }) => {
                         duration: 3000,
                         isClosable: true,
                     })
+                    dispatch(getAvailableAppointment(date))
                     setTimeout(() => handleCancel(), 2000)
                 }
             })

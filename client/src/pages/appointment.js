@@ -56,6 +56,7 @@ function Appointment() {
         date,
         timeslot: selectedAppointment.timeslot,
         doctor: selectedAppointment.doctor,
+        spaceID: activeAppointment
       }
       dispatch(scheduleUserAppointment({toBook,token: user.token})).then(() => {
         toast({
@@ -111,7 +112,13 @@ function Appointment() {
               <Button variant='secondary-btn' onClick={bookAppointment}>Book Appointment</Button>
             </Flex>
             {
-              appointments.results && appointments.results.map(appointment => <AppointmentSlot appointment={appointment} key={appointment._id} handleClick={focusAppointment} active={activeAppointment}/>)
+              appointments.results && (
+                appointments.results.length === 0 ? 
+                <Heading as='h1' fontSize={{ base: '0.9rem', sm: '0.9rem', md: '1rem', lg: '1rem' }} color='#959191'>
+                  No available appointments...
+                </Heading> :
+                appointments.results.map(appointment => <AppointmentSlot appointment={appointment} key={appointment._id} handleClick={focusAppointment} active={activeAppointment}/>)
+              )
             }
           </Box>
         </Flex>

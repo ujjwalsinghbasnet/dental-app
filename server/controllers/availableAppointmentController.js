@@ -27,41 +27,42 @@ const createAvailableAppointment = async (req,res) => {
     }
 }
 
-const dummyAppointments = [
-    {
-        _id: '687eeb9',
-        doctor: 'Dr. John',
-        timeslot: '9AM-10AM',
-        space: '2',
-        price: 800,
-        date: new Date()
-    },
-    {
-        _id: '617bdb9',
-        doctor: 'Dr. Jane',
-        timeslot: '10AM-11AM',
-        space: '5',
-        price: 500,
-        date: new Date()
-    },
-    {
-        _id: '129eBxN',
-        doctor: 'Dr. Mary',
-        timeslot: '9AM-10AM',
-        space: '2',
-        price: 800,
-        date: new Date()
-    },
-]
+// const dummyAppointments = [
+//     {
+//         _id: '687eeb9',
+//         doctor: 'Dr. John',
+//         timeslot: '9AM-10AM',
+//         space: '2',
+//         price: 800,
+//         date: new Date()
+//     },
+//     {
+//         _id: '617bdb9',
+//         doctor: 'Dr. Jane',
+//         timeslot: '10AM-11AM',
+//         space: '5',
+//         price: 500,
+//         date: new Date()
+//     },
+//     {
+//         _id: '129eBxN',
+//         doctor: 'Dr. Mary',
+//         timeslot: '9AM-10AM',
+//         space: '2',
+//         price: 800,
+//         date: new Date()
+//     },
+// ]
 
 const getAllAppointments = async (req,res) => {
     const selectedDate = new Date(req.query.date).toLocaleDateString()
-    const appointments = await AvailableAppointment.find({ date: selectedDate})
+    const appointments = await AvailableAppointment.find({ date: selectedDate, space: { $gt:0 }})
     return res.status(200).json({
         message: 'success',
-        results: dummyAppointments.concat(appointments)
+        results: appointments
     })
 }
+//dummyAppointments.concat(appointments)
 
 const updateSpace = async (req,res) => {
     const space = req.body.space

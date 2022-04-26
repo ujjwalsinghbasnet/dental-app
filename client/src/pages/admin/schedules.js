@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import AddAppointment from '../../components/admin/AddAppointment'
 import Layout from '../../components/admin/Layout'
+import UpdateDeleteAppointment from '../../components/admin/UpdateDeleteAppointment'
 import AppointmentSlot from '../../components/Appointment/AppointmentSlot'
 import Calendar from '../../components/Calendar'
 import { getAvailableAppointment } from '../../features/appointmentSlice'
@@ -15,6 +16,7 @@ function Schedules() {
   const [date,setDate] = useState(new Date())
   const [activeAppointment,setActiveAppointment] = useState(null)
   const [isOpen,setIsOpen] = useState(false)
+  const [upAndDel,setUpAndDel] = useState(false)
 
   useEffect(() => {
     dispatch(getAvailableAppointment(date))
@@ -22,7 +24,12 @@ function Schedules() {
 
   const focusAppointment = (id) => {
     setActiveAppointment(id)
-}
+    setUpAndDel(true)
+  }
+
+  const closeUpAndDel = () => {
+    setUpAndDel(false)
+  }
 
   const handleDateChange = (date) => {
     setDate(date)
@@ -60,6 +67,7 @@ function Schedules() {
               </Flex>
             </Flex>
             { isOpen ? <AddAppointment handleCancel={handleCancel}/> : '' }
+            { upAndDel ? <UpdateDeleteAppointment id={activeAppointment} closeUpAndDel={closeUpAndDel} /> : '' }
         </Flex>
     </Layout>
   )

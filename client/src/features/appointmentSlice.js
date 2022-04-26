@@ -52,6 +52,15 @@ export const getBookedAppointments = createAsyncThunk('appointment/getScheduledA
     }
 })
 
+export const editAvailableAppointment = createAsyncThunk('appointment/updateAvaiApp', async (data, thunkData) => {
+    try {
+        const appointment = await fetchServices.updateAvailableAppointment(data)
+        return appointment
+    } catch(error){
+        return thunkData.rejectWithValue({message: error?.message || 'error occured in updating'})
+    }
+})
+
 const appointmentSlice = createSlice({
     name: 'appointment',
     initialState,
@@ -117,6 +126,19 @@ const appointmentSlice = createSlice({
                 state.message = 'Successfully Added'
             })
             .addCase(addAppointment.rejected, (state,action) => {
+                state.isLoading = false
+                state.isSuccess = false
+                state.message = action.payload
+            })
+            .addCase(editAvailableAppointment.pending, (state,action) => {
+                state.isLoading = true
+            })
+            .addCase(editAvailableAppointment.fulfilled, (state,action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.message = 'successfully edited!'
+            })
+            .addCase(editAvailableAppointment.rejected, (state,action) => {
                 state.isLoading = false
                 state.isSuccess = false
                 state.message = action.payload

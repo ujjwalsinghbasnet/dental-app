@@ -69,6 +69,21 @@ const addAvailableAppointment = async (data) => {
     return addedApp.data
 }
 
+const getSingleAvailableAppointment = async (id) => {
+    const appointment = await axios.get(API_URL + `available-appointments/${id}`)
+    return appointment.data
+}
+
+const updateAvailableAppointment = async (data) => {
+    const appointment = await axios.put(API_URL + `available-appointments/${data.id}`, data.body)
+    return appointment.data
+}
+
+const deleteAvailableAppointment = async (id) => {
+    const appointment = await axios.delete(API_URL + `available-appointments/${id}`)
+    return appointment
+}
+
 const fetchServices = {
     register,
     login,
@@ -78,7 +93,10 @@ const fetchServices = {
     scheduleAppointment,
     retrieveAvailableAppointment,
     getScheduledAppointments,
-    addAvailableAppointment
+    addAvailableAppointment,
+    getSingleAvailableAppointment,
+    updateAvailableAppointment,
+    deleteAvailableAppointment
 }
 
 export default fetchServices

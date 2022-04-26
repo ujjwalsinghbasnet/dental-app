@@ -10,7 +10,8 @@ router
     
 router
     .route('/:id')
-    .put(availableAppointmentController.updateSpace)
+    .get(availableAppointmentController.getSingleAppointment)
+    .put(availableAppointmentController.updateAppointment)
     .delete(availableAppointmentController.deleteAvailableSlot)
 
 module.exports = router;

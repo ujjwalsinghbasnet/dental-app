@@ -64,12 +64,32 @@ const getAllAppointments = async (req,res) => {
 }
 //dummyAppointments.concat(appointments)
 
-const updateSpace = async (req,res) => {
-    const space = req.body.space
-    const appointment = await AvailableAppointment.updateOne({_id: req.params.id}, { space }, {new: true, runValidators: true})
-    res.status(201).json({
+const getSingleAppointment = async (req,res) => {
+    const appointment = await AvailableAppointment.findById(req.params.id)
+    return res.status(200).json({
         message: 'success',
-        results: appointment
+        result: appointment
+    })
+}
+
+const updateAppointment = async (req,res) => {
+    const appointment = await AvailableAppointment.findById(req.params.id)
+    const { space, timeslot, doctor, price } = req.body
+    appointment.space = space
+    appointment.timeslot = timeslot
+    appointment.doctor = doctor
+    appointment.price = price
+    appointment.save().then((doc,err) => {
+        if(!err){
+            return res.status(201).json({
+                message: 'success',
+                results: doc
+            })
+        } else {
+            return res.json({
+                message: err.message || 'something went wrong!'
+            })
+        }
     })
 }
 
@@ -85,6 +105,7 @@ const deleteAvailableSlot = async (req,res) => {
 module.exports = {
     createAvailableAppointment,
     getAllAppointments,
-    updateSpace,
-    deleteAvailableSlot
+    updateAppointment,
+    deleteAvailableSlot,
+    getSingleAppointment
 }

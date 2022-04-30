@@ -2,7 +2,7 @@ import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 import fetchServices from "./services";
 
 const initialState = {
-    appointment: [],
+    appointments: [],
     availableAppointment: [],
     isLoading: false,
     isSuccess: false,
@@ -65,7 +65,10 @@ const appointmentSlice = createSlice({
     name: 'appointment',
     initialState,
     reducers: {
-
+        markvisited: (state,action) => {
+            const selectedApp = state.appointments.results.filter(app => app._id === action.payload)[0]
+            selectedApp.visited = true
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -85,7 +88,7 @@ const appointmentSlice = createSlice({
                 state.isLoading = true
             })
             .addCase(getUserAppointments.fulfilled, (state,action) => {
-                state.appointment = state.appointment.concat(action.payload)
+                state.appointments = state.appointment.concat(action.payload)
                 state.isLoading = false
                 state.isSuccess = true
             })
@@ -110,7 +113,7 @@ const appointmentSlice = createSlice({
             })
             .addCase(getBookedAppointments.fulfilled, (state,action) => {
                 state.isLoading = false
-                state.appointment = action.payload
+                state.appointments = action.payload
                 state.isSuccess = true
             })
             .addCase(getBookedAppointments.rejected, (state,action) => {
@@ -145,5 +148,7 @@ const appointmentSlice = createSlice({
             })
     }
 })
+
+export const { markvisited } = appointmentSlice.actions
 
 export default appointmentSlice.reducer

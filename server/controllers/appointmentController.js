@@ -66,7 +66,7 @@ const scheduleAppointment = async (req,res) => {
     }
 }
 const updateAppointment = async (req, res) => {
-    const appointment = await Appointment.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
+    const appointment = await Appointment.findByIdAndUpdate(req.params.id, {visited: true}, { new: true, runValidators: true });
     res.status(201).json({
       message: 'success',
       results: appointment

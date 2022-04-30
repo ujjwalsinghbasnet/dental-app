@@ -11,7 +11,7 @@ const Appointments = () => {
 
     const dispatch = useDispatch()
     const toast = useToast()
-    const appointments = useSelector(state => state.appointment.appointment) || { results: [] }
+    const appointments = useSelector(state => state.appointment.appointments) || { results: [] }
     const [date,setDate] = useState(new Date())
     const [activeAppointment,setActiveAppointment] = useState(null)
     const [popupStatus, setPopupStatus] = useState(false)

@@ -1,14 +1,20 @@
 import React, { useState } from 'react'
 import { Box, Button, Flex, Heading } from '@chakra-ui/react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { markvisited } from '../../features/appointmentSlice'
+import fetchServices from '../../features/services'
 
 function PopupOnClick({ handleCancel, id}) {
-    const appointment = useSelector(state => state.appointment.appointment) || { results: [] }
+    const dispatch = useDispatch()
+    const appointment = useSelector(state => state.appointment.appointments) || { results: [] }
     const selectedApp = appointment.results.filter( app => app._id === id )[0]
     const [status,setStatus] = useState(selectedApp?.visited)
+    const user = JSON.parse(localStorage.getItem('dental_user'))
 
     const updateHandler = () => {
         setStatus(true)
+        dispatch(markvisited(id))
+        fetchServices.markVisited({id, token: user.token})
     }
     
   return (

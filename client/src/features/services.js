@@ -51,6 +51,15 @@ const getScheduledAppointments = async(date) => {
 
     return appointment.data
 }
+
+const markVisited = async (data) => {
+    const appointment = await axios.put(API_URL + `appointments/${data.id}`, {
+        headers: {
+            'auth':`Bearer ${data.token}`
+        }
+    })
+}
+
 //appointment related information
 
 //available-appointments
@@ -91,6 +100,7 @@ const fetchServices = {
     changeDetails,
     retrieveUserAppointments,
     scheduleAppointment,
+    markVisited,
     retrieveAvailableAppointment,
     getScheduledAppointments,
     addAvailableAppointment,

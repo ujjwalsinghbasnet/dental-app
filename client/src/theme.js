@@ -19,8 +19,13 @@ const theme = extendTheme({
             bg:'primary',
             color:'white',
             _hover: {
-              bg: 'primary'
-            }
+              bg: 'primary',
+              _disabled: {
+                _hover: {
+                  bg: 'primary'
+                }
+              }
+            },
           },
           'secondary-btn': {
             bg:'transparent',

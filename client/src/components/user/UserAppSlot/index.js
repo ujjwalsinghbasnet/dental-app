@@ -31,8 +31,6 @@ const UserAppSlot = ({ appointment }) => {
     checkStatus()
   return (
     <Box 
-      w='30%'
-      minW='18rem'
       p='1rem'
       borderRadius={'0.5rem'}
       mb='1rem'

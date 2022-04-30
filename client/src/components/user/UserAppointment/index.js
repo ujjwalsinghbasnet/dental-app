@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Flex } from '@chakra-ui/react'
+import { Grid } from '@chakra-ui/react'
 import { useDispatch,useSelector } from 'react-redux'
 
 import Layout from '../../admin/Layout'
@@ -17,16 +17,16 @@ function UserAppointment() {
 
   return (
     <Layout title='Appointment'>
-        <Flex
+        <Grid
             w='100%'
             mt='10rem'
-            justify='space-between'
-            flexWrap={'wrap'}
+            gridTemplateColumns='repeat(auto-fill, minmax(20rem, 1fr))'
+            gridGap='1rem'
         >
             {
               appointments && appointments[0]?.results.map(appointment => <UserAppSlot key={appointment._id} appointment={appointment}/>)
             }
-        </Flex>
+        </Grid>
     </Layout>
   )
 }

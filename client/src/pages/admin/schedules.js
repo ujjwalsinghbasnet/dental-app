@@ -62,7 +62,11 @@ function Schedules() {
               </Flex>
               <Flex mt='2rem' direction={'column'}>
                 {
-                    appointments.results && appointments.results.map((appointment) => <AppointmentSlot appointment={appointment} handleClick={focusAppointment} active={activeAppointment}/>)
+                    appointments.results && ( appointments.results.length === 0 ? 
+                    <Heading as='h1' fontSize={{ base: '0.9rem', sm: '0.9rem', md: '1rem', lg: '1rem' }} color='#959191'>
+                        No appointments slots added yet...
+                    </Heading> : appointments.results.map((appointment) => <AppointmentSlot appointment={appointment} handleClick={focusAppointment} active={activeAppointment} key={appointment._id}/>)
+                    )
                 }
               </Flex>
             </Flex>

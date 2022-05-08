@@ -3,7 +3,6 @@ const AvailableAppointment = require('../models/availableAppointments')
 
 const createAvailableAppointment = async (req,res) => {
     const user = req.user
-    console.log(user, req.body)
     if(user.role === 'admin'){
         try{
             const appointmentBody = {

@@ -69,6 +69,9 @@ function PopupOnClick({ handleCancel, id}) {
                     TimeSlot: { selectedApp.timeslot }
                 </Heading>
                 <Heading as='h2' fontWeight='light' fontSize={{base: '0.9rem', sm: '0.9rem', md: '1.1rem', lg: '1.3rem'}}>
+                    Payment: { selectedApp.payment }
+                </Heading>
+                <Heading as='h2' fontWeight='light' fontSize={{base: '0.9rem', sm: '0.9rem', md: '1.1rem', lg: '1.3rem'}}>
                     Status: { status ? 'visited' : 'due' }
                 </Heading>
                 <Button variant='primary-btn' mt='2rem' mx='25%' w='50%' onClick={updateHandler} mr='1.5rem' disabled={status}>Mark Visited</Button>

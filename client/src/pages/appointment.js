@@ -20,6 +20,7 @@ function Appointment() {
   const [date, setDate] = useState(new Date())
   const [paymentModal,setPaymentModal] = useState(false)
   const [bookedApp,setBookedApp] = useState('')
+  const [userAppointment, setUserAppointment] = useState()
   const user = JSON.parse(localStorage.getItem('dental_user'))
 
   useEffect(() => {
@@ -66,7 +67,8 @@ function Appointment() {
         spaceID: activeAppointment
       }
       setBookedApp(selectedAppointment)
-      dispatch(scheduleUserAppointment({toBook,token: user.token})).then(() => {
+      dispatch(scheduleUserAppointment({toBook,token: user.token})).then((data) => {
+        setUserAppointment(data.payload.results)
         toast({
           title: 'Done',
           description: 'appointment booked successfully',
@@ -133,7 +135,7 @@ function Appointment() {
         </Flex>
         </Box>
       </Box>
-      { paymentModal ? <PayNow closeModal={handlePaymentModalClose} appointment={bookedApp}/> : '' }
+      { paymentModal ? <PayNow closeModal={handlePaymentModalClose} appointment={bookedApp} booked={userAppointment}/> : '' }
     </Box>
   )
 }

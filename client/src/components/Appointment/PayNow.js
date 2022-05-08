@@ -4,22 +4,20 @@ import KhaltiCheckout from 'khalti-checkout-web'
 import fetchServices from '../../features/services';
 import { useNavigate } from 'react-router-dom';
 
-const PayNow = ({ closeModal, appointment }) => {
+const PayNow = ({ closeModal, appointment, booked }) => {
 
     const toast = useToast()
     const navigate = useNavigate()
 
     const config = {
         publicKey: 'test_public_key_4ba198b2d93d4a22821917babd948520',
-        productIdentity: `${appointment._id}`,
+        productIdentity: `${booked._id}`,
         productName: 'appointment',
         productUrl: 'http://localhost:3000/appointment',
         eventHandler: {
             onSuccess(payload){
                 //initiate verification
-                console.log(payload)
                 fetchServices.verifyPayment(payload).then(data => {
-                    console.log(data)
                     if(data.status === 200){
                         toast({
                             title: 'Payment Success!',

@@ -3,7 +3,7 @@ const Appointment = require('../models/appointment');
 
 const paymentWithKhalti = async (req,res) => {
     const { token, amount, product_identity } = req.body
-    console.log({token,amount})
+
     let data = {
         "token": token,
         "amount": amount
@@ -15,9 +15,10 @@ const paymentWithKhalti = async (req,res) => {
     
     axios.post("https://khalti.com/api/v2/payment/verify/", data, config)
         .then(response => {
-            if(response.data.status===200){
-                console.log('running')
-                Appointment.findByIdAndUpdate(product_identity, { payment: 'verified' }, { runValidators: true })
+            if(response.status===200){
+                const paidApp = Appointment.findByIdAndUpdate(product_identity, { payment: 'verified' }, { runValidators: true }).then(updated => {
+                    console.log({updated})
+                })
             }
             res.json(response.data);
         })

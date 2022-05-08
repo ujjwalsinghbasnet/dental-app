@@ -88,7 +88,7 @@ const appointmentSlice = createSlice({
                 state.isLoading = true
             })
             .addCase(getUserAppointments.fulfilled, (state,action) => {
-                state.appointments = state.appointment.concat(action.payload)
+                state.appointments = state.appointments.concat(action.payload)
                 state.isLoading = false
                 state.isSuccess = true
             })

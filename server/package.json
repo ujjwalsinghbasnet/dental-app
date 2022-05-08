@@ -9,6 +9,7 @@
   "author": "Ujjwal Singh Basnet",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.27.2",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "express": "^4.17.2",

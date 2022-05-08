@@ -1,22 +1,25 @@
 import React, {useEffect, useState} from 'react'
 import { Box, Button, Flex, Heading,useToast } from '@chakra-ui/react'
 import { useDispatch,useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
 
 import NavResponsive from '../components/NavResponsive'
 import Calendar from '../components/Calendar'
 import AppointmentSlot from '../components/Appointment/AppointmentSlot'
 import { getAvailableAppointment, scheduleUserAppointment } from '../features/appointmentSlice'
+import PayNow from '../components/Appointment/PayNow'
+import { useNavigate } from 'react-router-dom'
 
 function Appointment() {
 
   const dispatch = useDispatch()
-  const navigate = useNavigate()
   const toast = useToast()
+  const navigate = useNavigate()
 
   const appointments = useSelector(state => state.appointment.availableAppointment) || { results: [] }
   const [activeAppointment,setActiveAppointment] = useState(null)
   const [date, setDate] = useState(new Date())
+  const [paymentModal,setPaymentModal] = useState(false)
+  const [bookedApp,setBookedApp] = useState('')
   const user = JSON.parse(localStorage.getItem('dental_user'))
 
   useEffect(() => {
@@ -39,6 +42,10 @@ function Appointment() {
   const handleDateChange = (date) => {
     setDate(date)
     dispatch(getAvailableAppointment(date))
+  } 
+  const handlePaymentModalClose = () => { 
+    setPaymentModal(false)
+    navigate('/user/appointments', { replace: true }) 
   }
   
   const bookAppointment = () => {
@@ -58,6 +65,7 @@ function Appointment() {
         doctor: selectedAppointment.doctor,
         spaceID: activeAppointment
       }
+      setBookedApp(selectedAppointment)
       dispatch(scheduleUserAppointment({toBook,token: user.token})).then(() => {
         toast({
           title: 'Done',
@@ -67,7 +75,8 @@ function Appointment() {
           isClosable: true,
         })
         setTimeout(() => {
-          navigate('/user/appointments', { replace: true })
+          // navigate('/user/appointments', { replace: true })
+          setPaymentModal(true)
         }, 3000)
       })
     }
@@ -124,6 +133,7 @@ function Appointment() {
         </Flex>
         </Box>
       </Box>
+      { paymentModal ? <PayNow closeModal={handlePaymentModalClose} appointment={bookedApp}/> : '' }
     </Box>
   )
 }

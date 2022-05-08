@@ -19,6 +19,10 @@ const appointmentSchema = new mongoose.Schema({
         trim: true,
         required: true
     },
+    payment: {
+        type: String,
+        default: 'due'
+    },
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'

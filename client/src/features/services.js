@@ -93,6 +93,14 @@ const deleteAvailableAppointment = async (id) => {
     return appointment
 }
 
+
+//PAYMENT SERVICES
+
+const verifyPayment = async (data) => {
+    const payment = await axios.post(API_URL + `payment`, data)
+    return payment
+}
+
 const fetchServices = {
     register,
     login,
@@ -106,7 +114,8 @@ const fetchServices = {
     addAvailableAppointment,
     getSingleAvailableAppointment,
     updateAvailableAppointment,
-    deleteAvailableAppointment
+    deleteAvailableAppointment,
+    verifyPayment
 }
 
 export default fetchServices

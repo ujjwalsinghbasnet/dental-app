@@ -8,7 +8,7 @@ import { getUserAppointments } from '../../../features/appointmentSlice'
 
 function UserAppointment() {
   const dispatch = useDispatch()
-  const appointments = useSelector(state => state.appointment.appointment)
+  const appointments = useSelector(state => state.appointment.appointments)
   const user = JSON.parse(localStorage.getItem('dental_user'))
 
   useEffect(() => {

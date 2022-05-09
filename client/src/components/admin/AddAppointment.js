@@ -26,7 +26,8 @@ const AddAppointment = ({ handleCancel }) => {
     }
     const submitHandler = () => {
         const { timeslot, doctor, space, price } = appointment
-        if(!timeslot || !doctor || !space || !price){
+
+        if(!timeslot || !doctor || !space || !price){   
             toast({
                 title: 'Error',
                 description: 'All fields required',
@@ -115,7 +116,7 @@ const AddAppointment = ({ handleCancel }) => {
                     <FormLabel htmlFor='doctor'>Assigned Doctor</FormLabel>
                     <Select placeholder='Select option' onChange={handleChange} id='doctor'>
                         <option value='Dr. Ujjwal Singh Basnet'>Dr. Ujjwal Singh Basnet</option>
-                        <option value='Dr. Ujjwal Singh Basnet'>Dr. Nigita Kumal</option>
+                        <option value='Dr. Nigita Kumal'>Dr. Nigita Kumal</option>
                         <option value='Dr. John Doe'>Dr. John Doe</option>
                         <option value='Dr. Mary Jane'>Dr. Mary Jane</option>
                     </Select>

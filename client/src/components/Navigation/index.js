@@ -57,8 +57,8 @@ function Navigation() {
         zIndex={3}
       >
           <Flex color='menu' w='40%' justify='space-between'>
-            <NavLink to='#'>Home</NavLink>
-            <NavLink to='#'>Services</NavLink>
+            <NavLink to='/'>Home</NavLink>
+            <NavLink to='#services'>Services</NavLink>
             <NavLink to='#'>Dentists</NavLink>
             <NavLink to='#'>Contact Us</NavLink>
           </Flex>

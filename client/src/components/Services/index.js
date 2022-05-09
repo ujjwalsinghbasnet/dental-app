@@ -28,7 +28,7 @@ function Services() {
     ]
 
   return (
-      <Section>
+      <Section id='services'>
           <Heading as='h1' color='primary' textAlign={'center'} lineHeight={'90%'} mb='4rem' mt='-2rem' fontSize={{ base: '2.8rem', sm: '3.8rem', md: '4.5rem', lg: '4rem'}}>Our Services</Heading>
           <Flex
             justify='space-between'

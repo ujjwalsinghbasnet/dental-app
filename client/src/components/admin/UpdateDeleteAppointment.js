@@ -113,6 +113,7 @@ const UpdateDeleteAppointment = ({id,closeUpAndDel}) => {
                     <FormLabel htmlFor='doctor'>Assigned Doctor</FormLabel>
                     <Select placeholder='Select option' onChange={handleChange} id='doctor' defaultValue={appointment.doctor}>
                         <option value='Dr. Ujjwal Singh Basnet'>Dr. Ujjwal Singh Basnet</option>
+                        <option value='Dr. Nigita Kumal'>Dr. Nigita Kumal</option>
                         <option value='Dr. John Doe'>Dr. John Doe</option>
                         <option value='Dr. Mary Jane'>Dr. Mary Jane</option>
                     </Select>

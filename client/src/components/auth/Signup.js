@@ -15,7 +15,8 @@ import {
   Spacer,
   Button,
   Text,
-  useToast
+  useToast,
+  useRadioGroup
 } from '@chakra-ui/react';
 import { useNavigate, NavLink } from 'react-router-dom';
 import NavResponsive from '../NavResponsive';
@@ -28,6 +29,8 @@ function Signup() {
   const dispatch = useDispatch()
   const toast = useToast()
   const navigate = useNavigate()
+  
+
 
   const [info,setInfo] = useState({
     name: '',
@@ -35,12 +38,18 @@ function Signup() {
     password: '',
     password1: '',
     phone: '',
-    gender: 'notConfirmed'
+    address: '',
   })
 
   const changeHandler = (e) => {
     setInfo({...info, [e.target.id]: e.target.value});
   }
+
+  const { value, getRadioProps, getRootProps } = useRadioGroup({
+    defaultValue: 'notConfirmed',
+    // onChange: changeHandler
+  })
+
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -54,8 +63,28 @@ function Signup() {
         isClosable: true,
       })
     } else {
-      dispatch(register(info)).then(() => {
-        navigate('/login', {replace: true})
+        const formData = {...info, gender: value }
+      dispatch(register(formData)).then((res) => {
+        if(res.hasOwnProperty('error')){
+          toast({
+            title: res.payload.message,
+            description: 'Error on creating user...',
+            status: 'error',
+            duration: 3000,
+            isClosable: true,
+          })
+      } else {
+        toast({
+          title: 'Successfull',
+          description: 'User created successfully!',
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+        })
+        setTimeout(() => {
+          navigate('/auth/login', {replace: true})
+        }, 2500)
+      }
       })
     }
   }
@@ -101,9 +130,15 @@ function Signup() {
                 <FormHelperText>password must match</FormHelperText>
               </FormControl>
               <Spacer />
+              <FormControl isRequired>
+                <FormLabel htmlFor='address'>Address</FormLabel>
+                <Input id='address' type='address' value={info.address} onChange={changeHandler}/>
+                <FormHelperText>must not be empty</FormHelperText>
+              </FormControl>
+              <Spacer />
               <FormControl as='fieldset'>
               <FormLabel as='legend'>Gender</FormLabel>
-                <RadioGroup defaultValue={info.gender} onChange={changeHandler}>
+                <RadioGroup id='gender' defaultValue='notConfirmed' {...getRootProps()}  {...getRadioProps({ value: info.gender })}>
                   <HStack spacing='24px' mb='1rem'>
                     <Radio value='male'>Male</Radio>
                     <Radio value='female'>Female</Radio>

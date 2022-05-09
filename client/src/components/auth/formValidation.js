@@ -14,7 +14,7 @@ export const formValidation = (userData) => {
     //   const nameRegex = /^[a-zA-Z]+" *"{6,50}$/;
       
       if(name === '' || name.length < 6){
-          return { status: false, title:'Username Invalid!', message:'username should not be empty' };
+          return { status: false, title:'Username Invalid!', message:'username should not be at least 6 char long' };
       }
       if(!password.match(passwordRegex)){
         return { status: false, title:'Password Invalid!', message:'must be 6 digit and should consist of number and symbols' };

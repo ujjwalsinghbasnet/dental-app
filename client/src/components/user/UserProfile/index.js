@@ -53,7 +53,7 @@ function UserProfile() {
       } else {
         toast({
           title: 'Done',
-          description: 'user details change successfully',
+          description: 'user details changed successfully',
           status: 'success',
           duration: 3000,
           isClosable: true,

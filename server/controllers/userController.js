@@ -46,7 +46,7 @@ const signup = async (req,res) => {
     } else {
         bcrypt.genSalt(12, (err,salt) => {
             bcrypt.hash(password,salt, (err, hash) => {
-                const user = { email, password: hash, name: req.body.name, gender: req.body.gender, phone: req.body.phone }
+                const user = { email, password: hash, name: req.body.name, gender: req.body.gender, phone: req.body.phone, address: req.body.address }
                 const newuser = new User(user)
                 newuser.save((err, result) => {
                     if(err){

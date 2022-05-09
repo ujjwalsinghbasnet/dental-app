@@ -4,6 +4,7 @@ const API_URL = 'http://localhost:4000/api/'
 
 //user related information retrieved
 const register = async (formData) => {
+    console.log(formData)
     const user = await axios.post(API_URL+ 'users', formData)
     return user.data
 }

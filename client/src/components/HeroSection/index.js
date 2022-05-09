@@ -10,17 +10,17 @@ import {
   } from '@chakra-ui/react'
 import NavResponsive from '../NavResponsive';
 import BottomCard from '../BottomCard';
-import Calendar from '../Calendar';
+import hero from '../../images/hero-bg.png'
+import hero2 from '../../images/hero_image.png'
 
 function HeroSection() {
-    const [calendarState, setCalendarState] = useState(false)
 
   return (
       <Box position={'relative'}>
         <Flex 
             w='100%' 
             h='39.5rem' 
-            bg='url("/images/hero-bg.png")'
+            bg={`url('${hero}')`}
             bgPos='center'
             bgRepeat='no-repeat'
             bgSize='cover'
@@ -57,14 +57,12 @@ function HeroSection() {
                 </Button>
             </NavLink>
         </Box>
-        {
-            calendarState ? <Calendar /> : ''
-        }
+       
         <Box
             w='35%'
             h='100%'
             display={['none', 'none', 'none', 'block']}
-            bgImage='/images/hero_image.jpg'
+            bgImage={hero2}
             backgroundSize={'cover'}
         >
             {/* <Image 

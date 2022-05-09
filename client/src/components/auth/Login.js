@@ -19,6 +19,7 @@ import { NavLink, useNavigate,useLocation } from 'react-router-dom';
 import { login } from '../../features/authSlice';
 import NavResponsive from '../NavResponsive';
 import { loginValidation } from './formValidation';
+import loginImage from '../../images/login.jpg'
 
 
 function Login() {
@@ -101,11 +102,11 @@ function Login() {
         </Box>
         <Box
           position='relative'
-          h='60%'
+          h='100%'
           display={{ base: 'none', sm: 'none', md: 'none', lg: 'flex'}}
           w={{base: '100%', sm: '100%', md: '50%', lg:'45%'}}
         >
-          <Image src='/images/login.jpg' alt='login in dental-world' w='100%' h='100%'/>
+          <Image src={loginImage} alt='login in dental-world' w='100%' h='100%'/>
         </Box>
       </Flex>    
     </Box>

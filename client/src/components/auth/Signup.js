@@ -23,6 +23,7 @@ import NavResponsive from '../NavResponsive';
 import { formValidation } from './formValidation';
 import { useDispatch } from 'react-redux'
 import { register } from '../../features/authSlice'
+import loginImage from '../../images/login.jpg'
 
 function Signup() {
 
@@ -155,11 +156,11 @@ function Signup() {
         </Box>
         <Box
           position='relative'
-          h='60%'
+          h='100%'
           display={{ base: 'none', sm: 'none', md: 'none', lg: 'flex'}}
           w={{base: '100%', sm: '100%', md: '50%', lg:'45%'}}
         >
-          <Image src='/images/login.jpg' alt='login in dental-world' boxSize={'100%'} objectFit='cover'/>
+          <Image src={loginImage} alt='login in dental-world' w='100%' h='100%'/>
         </Box>
       </Flex>
     </Box>

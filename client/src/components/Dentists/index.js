@@ -2,6 +2,7 @@ import { Box, Flex, Heading } from '@chakra-ui/react';
 import React from 'react';
 import DentistCards from '../DentistCards';
 import Section from '../Layouts/SectionLayout';
+import image from '../../images/hero_image.png'
 
 function Dentists() {
 
@@ -11,21 +12,21 @@ function Dentists() {
         name: 'Dr. Marie Cooper',
         designation: 'Dental Surgeon',
         text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quasi veniam optio consenter quod beatae, atque quae ipsam, alias est reprehenderit debitis explicabo itaque pariatur nisi!',
-        image: '/images/hero_image.png'
+        image
     },
     {
         id: 1,
         name: 'Dr. Marie Cooper',
         designation: 'Dental Surgeon',
         text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quasi veniam optio consenter quod beatae, atque quae ipsam, alias est reprehenderit debitis explicabo itaque pariatur nisi!',
-        image: '/images/hero_image.png'
+        image
     },
     {
         id: 2,
         name: 'Dr. Marie Cooper',
         designation: 'Dental Surgeon',
         text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quasi veniam optio consenter quod beatae, atque quae ipsam, alias est reprehenderit debitis explicabo itaque pariatur nisi!',
-        image: '/images/hero_image.png'
+        image
     },
   ] 
 

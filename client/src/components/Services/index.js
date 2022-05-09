@@ -2,6 +2,7 @@ import { Box, Flex, Heading } from '@chakra-ui/react';
 import React from 'react';
 import Section from '../Layouts/SectionLayout';
 import ServiceCard from '../ServiceCard';
+import hero from '../../images/hero_image.png'
 
 
 function Services() {
@@ -11,19 +12,19 @@ function Services() {
             id: 0,
             title:'Endodontics',
             text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quasi veniam optio consenter quod beatae, atque quae ipsam, alias est reprehenderit debitis explicabo itaque pariatur nisi!',
-            image: '/images/hero_image.png'
+            image: hero
         },
         {
             id: 1,
             title:'Oral Pathology',
             text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quasi veniam optio consenter quod beatae, atque quae ipsam, alias est reprehenderit debitis explicabo itaque pariatur nisi!',
-            image: '/images/hero_image.png'
+            image: hero
         },
         {
             id: 2,
             title:'Peridontics',
             text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quasi veniam optio consenter quod beatae, atque quae ipsam, alias est reprehenderit debitis explicabo itaque pariatur nisi!',
-            image: '/images/hero_image.png'
+            image: hero
         },
     ]
 

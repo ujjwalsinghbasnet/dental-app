@@ -29,8 +29,13 @@ function Services() {
     ]
 
   return (
-      <Section id='services'>
-          <Heading as='h1' color='primary' textAlign={'center'} lineHeight={'90%'} mb='4rem' mt='-2rem' fontSize={{ base: '2.8rem', sm: '3.8rem', md: '4.5rem', lg: '4rem'}}>Our Services</Heading>
+      <Box
+        w='100%'
+        py='1.5rem'
+        bgColor='#1a202c'
+      >
+        <Section id='services'>
+          <Heading as='h1' color='white' textAlign={'center'} lineHeight={'90%'} mb='4rem' mt='-2rem' fontSize={{ base: '2.8rem', sm: '3.8rem', md: '4.5rem', lg: '4rem'}}>Our Services</Heading>
           <Flex
             justify='space-between'
             position='relative'
@@ -40,7 +45,8 @@ function Services() {
                 services.map((item) => <ServiceCard key={item.id} image={item.image} title={item.title} text={item.text} />)
             }
           </Flex>
-      </Section>
+        </Section>
+      </Box>
   );
 }
 

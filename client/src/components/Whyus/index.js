@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Flex, Image, Text, Heading, Button } from '@chakra-ui/react'
 import Section from '../Layouts/SectionLayout';
+import heroBg from '../../images/second-bg.png'
 
 function WhyUs() {
   return (
@@ -25,7 +26,7 @@ function WhyUs() {
         </Box>
         <Box pos='relative' width={{base: '90%', sm: '80%', md: '55%', lg: '55%'}} h='100%' alignSelf={'center'} mt='-7%'>
             <Box>
-                <Image objectFit={'cover'} src='/images/second-bg.png' alt='second bg' />
+                <Image objectFit={'cover'} src={heroBg} alt='second bg' />
             </Box>
         </Box>
         </Flex>

@@ -1,11 +1,13 @@
 import { Box, Flex, Heading, useToast } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Suspense } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Layout from '../../components/admin/Layout'
 import Calendar from '../../components/Calendar'
 import { getBookedAppointments } from '../../features/appointmentSlice'
 import AdminAppointmentSlot from '../../components/Appointment/AdminAppointmentSlot'
-import PopupOnClick from '../../components/Appointment/PopupOnClick'
+// import PopupOnClick from '../../components/Appointment/PopupOnClick'
+
+const PopupOnClick = React.lazy(() => import('../../components/Appointment/PopupOnClick'))
 
 const Appointments = () => {
 
@@ -68,7 +70,11 @@ const Appointments = () => {
                 </Flex>
             </Flex>
         </Flex>
-        { popupStatus && <PopupOnClick handleCancel={handlePopupCancel} id={activeAppointment}/>}
+        { popupStatus && 
+            <Suspense fallback={<div>Loading...</div>}>
+                <PopupOnClick handleCancel={handlePopupCancel} id={activeAppointment}/>
+            </Suspense>
+        }
     </Layout>
   )
 }

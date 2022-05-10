@@ -11,7 +11,7 @@ import {
 import NavResponsive from '../NavResponsive';
 import BottomCard from '../BottomCard';
 import hero from '../../images/hero-bg.png'
-import hero2 from '../../images/hero_image.png'
+import hero2 from '../../images/hero_image-min.png'
 
 function HeroSection() {
 

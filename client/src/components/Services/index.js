@@ -2,7 +2,7 @@ import { Box, Flex, Heading } from '@chakra-ui/react';
 import React from 'react';
 import Section from '../Layouts/SectionLayout';
 import ServiceCard from '../ServiceCard';
-import hero from '../../images/hero_image.png'
+import hero from '../../images/hero_image-min.png'
 
 
 function Services() {
@@ -33,8 +33,9 @@ function Services() {
         w='100%'
         py='1.5rem'
         bgColor='#1a202c'
+        id='services'
       >
-        <Section id='services'>
+        <Section>
           <Heading as='h1' color='white' textAlign={'center'} lineHeight={'90%'} mb='4rem' mt='-2rem' fontSize={{ base: '2.8rem', sm: '3.8rem', md: '4.5rem', lg: '4rem'}}>Our Services</Heading>
           <Flex
             justify='space-between'

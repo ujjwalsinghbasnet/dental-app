@@ -1,62 +1,91 @@
 import './App.css';
+import React, { Suspense } from 'react'
 import { Route, Routes } from 'react-router'
-import Login from './components/auth/Login';
-import Signup from './components/auth/Signup';
+// import Login from './components/auth/Login';
+// import Signup from './components/auth/Signup';
 import Home from './pages/Home';
-import Appointment from './pages/appointment';
-import Dashboard from './pages/admin/dashboard';
-import Patients from './pages/admin/patients';
-import Doctors from './pages/admin/doctors';
-import Schedules from './pages/admin/schedules';
-import ProtectedRoute from './components/ProtectedRoute';
-import UserProfile from './components/user/UserProfile';
-import UserAppointment from './components/user/UserAppointment';
-import Appointments from './pages/admin/appointments';
+// import Appointment from './pages/appointment';
+// import Dashboard from './pages/admin/dashboard';
+// import Patients from './pages/admin/patients';
+// import Doctors from './pages/admin/doctors';
+// import Schedules from './pages/admin/schedules';
+// import ProtectedRoute from './components/ProtectedRoute';
+// import UserProfile from './components/user/UserProfile';
+// import UserAppointment from './components/user/UserAppointment';
+// import Appointments from './pages/admin/appointments';
+
+const Signup = React.lazy(() => import('./components/auth/Signup'))
+const Login = React.lazy(() => import('./components/auth/Login'))
+const Appointment = React.lazy(() => import('./pages/appointment'))
+const Dashboard = React.lazy(() => import('./pages/admin/dashboard'))
+const Patients = React.lazy(() => import('./pages/admin/patients'))
+const Doctors = React.lazy(() => import('./pages/admin/doctors'))
+const Schedules = React.lazy(() => import('./pages/admin/schedules'))
+const ProtectedRoute = React.lazy(() => import('./components/ProtectedRoute'))
+const UserProfile = React.lazy(() => import('./components/user/UserProfile'))
+const UserAppointment = React.lazy(() => import('./components/user/UserAppointment'))
+const Appointments = React.lazy(() => import('./pages/admin/appointments'))
 
 function App() {
   return (
       <Routes>
-        <Route path='/auth/login' element={<Login />} />
-        <Route path='/auth/register' element={<Signup />}/>
+        <Route path='/auth/login' element={<Suspense fallback={<div>Loading...</div>}><Login /></Suspense>} />
+        <Route path='/auth/register' element={<Suspense fallback={<div>Loading...</div>}><Signup /></Suspense>}/>
         <Route path='/appointment' element={
-          <ProtectedRoute>
-            <Appointment />
-          </ProtectedRoute>
+          <Suspense fallback={<div>Loading...</div>}>
+            <ProtectedRoute>
+              <Appointment />
+            </ProtectedRoute>
+          </Suspense>
         }/>
         <Route path='/admin/' element={
-          <ProtectedRoute>
-            <Dashboard />
-          </ProtectedRoute>
+          <Suspense fallback={<div>Loading...</div>}>
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          </Suspense>
         }/>
         <Route path='/admin/patients' element={
-          <ProtectedRoute>
-            <Patients />
-          </ProtectedRoute>
+          <Suspense fallback={<div>Loading...</div>}>
+            <ProtectedRoute>
+              <Patients />
+            </ProtectedRoute>
+          </Suspense>
         }/>
         <Route path='/admin/doctors' element={
-          <ProtectedRoute>
-            <Doctors />
-          </ProtectedRoute>
+          <Suspense fallback={<div>Loading...</div>}>
+            <ProtectedRoute>
+              <Doctors />
+            </ProtectedRoute>
+          </Suspense>
         }/>
         <Route path='/admin/appointments' element={
-          <ProtectedRoute>
-            <Appointments />
-          </ProtectedRoute>
+          <Suspense fallback={<div>Loading...</div>}>
+            <ProtectedRoute>
+              <Appointments />
+            </ProtectedRoute>
+          </Suspense>
         }/>
         <Route path='/admin/schedules' element={
-          <ProtectedRoute>
-            <Schedules />
-          </ProtectedRoute>
+          <Suspense fallback={<div>Loading...</div>}>
+            <ProtectedRoute>
+              <Schedules />
+            </ProtectedRoute>
+          </Suspense>
         }/>
         <Route path='/user/profile' element={
-          <ProtectedRoute>
-            <UserProfile />
-          </ProtectedRoute>
+          <Suspense fallback={<div>Loading...</div>}>
+            <ProtectedRoute>
+              <UserProfile />
+            </ProtectedRoute>
+          </Suspense>
         }/>
         <Route path='/user/appointments' element={
-          <ProtectedRoute>
-            <UserAppointment />
-          </ProtectedRoute>
+          <Suspense fallback={<div>Loading...</div>}>
+            <ProtectedRoute>
+              <UserAppointment />
+            </ProtectedRoute>
+          </Suspense>
         }/>
         <Route path='/' element={<Home />} />
       </Routes>

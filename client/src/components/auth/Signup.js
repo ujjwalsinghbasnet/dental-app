@@ -23,7 +23,7 @@ import NavResponsive from '../NavResponsive';
 import { formValidation } from './formValidation';
 import { useDispatch } from 'react-redux'
 import { register } from '../../features/authSlice'
-import loginImage from '../../images/login.jpg'
+import loginImage from '../../images/login-min.jpg'
 
 function Signup() {
 

@@ -19,7 +19,7 @@ import { NavLink, useNavigate,useLocation } from 'react-router-dom';
 import { login } from '../../features/authSlice';
 import NavResponsive from '../NavResponsive';
 import { loginValidation } from './formValidation';
-import loginImage from '../../images/login.jpg'
+import loginImage from '../../images/login-min.jpg'
 
 
 function Login() {

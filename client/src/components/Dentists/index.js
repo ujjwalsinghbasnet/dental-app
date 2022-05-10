@@ -2,7 +2,7 @@ import { Box, Flex, Heading } from '@chakra-ui/react';
 import React from 'react';
 import DentistCards from '../DentistCards';
 import Section from '../Layouts/SectionLayout';
-import image from '../../images/hero_image.png'
+import image from '../../images/hero_image-min.png'
 
 function Dentists() {
 

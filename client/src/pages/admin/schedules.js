@@ -1,12 +1,15 @@
-import { Box, Button, Flex, Heading } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
+import { Button, Flex, Heading } from '@chakra-ui/react'
+import React, { useEffect, useState, Suspense } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import AddAppointment from '../../components/admin/AddAppointment'
+// import AddAppointment from '../../components/admin/AddAppointment'
 import Layout from '../../components/admin/Layout'
-import UpdateDeleteAppointment from '../../components/admin/UpdateDeleteAppointment'
+// import UpdateDeleteAppointment from '../../components/admin/UpdateDeleteAppointment'
 import AppointmentSlot from '../../components/Appointment/AppointmentSlot'
 import Calendar from '../../components/Calendar'
 import { getAvailableAppointment } from '../../features/appointmentSlice'
+
+const AddAppointment = React.lazy(() => import('../../components/admin/AddAppointment'))
+const UpdateDeleteAppointment = React.lazy(() => import('../../components/admin/UpdateDeleteAppointment'))
 
 
 function Schedules() {
@@ -70,8 +73,16 @@ function Schedules() {
                 }
               </Flex>
             </Flex>
-            { isOpen ? <AddAppointment handleCancel={handleCancel}/> : '' }
-            { upAndDel ? <UpdateDeleteAppointment id={activeAppointment} closeUpAndDel={closeUpAndDel} /> : '' }
+            { isOpen ? 
+              <Suspense fallback={<div>Loading...</div>}>
+                <AddAppointment handleCancel={handleCancel}/>
+              </Suspense>
+            : '' }
+            { upAndDel ? 
+              <Suspense fallback={<div>Loading...</div>}>
+                <UpdateDeleteAppointment id={activeAppointment} closeUpAndDel={closeUpAndDel} />
+              </Suspense>
+            : '' }
         </Flex>
     </Layout>
   )

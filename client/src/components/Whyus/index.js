@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Flex, Image, Text, Heading, Button } from '@chakra-ui/react'
 import Section from '../Layouts/SectionLayout';
-import heroBg from '../../images/second-bg.png'
+import heroBg from '../../images/second-bg-min.png'
 
 function WhyUs() {
   return (

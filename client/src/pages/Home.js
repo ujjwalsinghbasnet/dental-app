@@ -1,22 +1,32 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 
-import Dentists from '../components/Dentists';
-import Footer from '../components/Footer';
-import HeroSection from '../components/HeroSection';
-import PageLayout from '../components/PageLayout';
-import Services from '../components/Services';
-import WhyUs from '../components/Whyus';
+const Dentists = React.lazy(() => import('../components/Dentists'))
+const Footer = React.lazy(() => import('../components/Footer'))
+const HeroSection = React.lazy(() => import('../components/HeroSection'))
+const PageLayout = React.lazy(() => import('../components/PageLayout'))
+const Services = React.lazy(() => import('../components/Services'))
+const WhyUs = React.lazy(() => import('../components/Whyus'))
+
+// import PageLayout from '../components/PageLayout'
+// import HeroSection from '../components/HeroSection'
+// import WhyUs from '../components/Whyus'
+// import Services from '../components/Services'
+// import Dentists from '../components/Dentists'
+// import Footer from '../components/Footer'
+
 
 function Home() {
 
   return (
-   <PageLayout>
-    <HeroSection />
-    <WhyUs />
-    <Services />
-    <Dentists />
-    <Footer />
-   </PageLayout>
+    <Suspense fallback={<div> Loading... </div>}>
+      <PageLayout>
+          <HeroSection />
+          <WhyUs />
+          <Services />
+          <Dentists />
+          <Footer />
+      </PageLayout>
+    </Suspense>
   )
 }
 

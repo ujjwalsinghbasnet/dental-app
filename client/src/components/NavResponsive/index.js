@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import MobileMenu from '../MobileMenu';
-import Navigation from '../Navigation';
+import React, { useState, useEffect, Suspense } from 'react';
+// import MobileMenu from '../MobileMenu';
+// import Navigation from '../Navigation';
+
+const Navigation = React.lazy(() => import('../Navigation')) //this had the largest impact on performance improvement
+const MobileMenu = React.lazy(() => import('../MobileMenu'))
 
 
 function NavResponsive() {
@@ -27,7 +30,14 @@ function NavResponsive() {
   return (
       <>
         {
-            mobStatus ? <MobileMenu /> : <Navigation />
+            mobStatus ?
+                <Suspense fallback={<div>Loading...</div>}>
+                    <MobileMenu />
+                </Suspense>
+            : 
+            <Suspense fallback={<div>Loading...</div>}>
+                <Navigation />
+            </Suspense>
         }
       </>
   );

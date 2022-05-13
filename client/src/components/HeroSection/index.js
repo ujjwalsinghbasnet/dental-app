@@ -16,7 +16,7 @@ import hero2 from '../../images/hero_image-min.png'
 function HeroSection() {
 
   return (
-      <Box position={'relative'}>
+      <Box position={'relative'} id='home'>
         <Flex 
             w='100%' 
             h='39.5rem' 

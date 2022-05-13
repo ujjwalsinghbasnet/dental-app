@@ -4,7 +4,8 @@
   "description": "A nodejs backend for dental-world.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ."
   },
   "author": "Ujjwal Singh Basnet",
   "license": "ISC",
@@ -12,6 +13,7 @@
     "axios": "^0.27.2",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
     "express": "^4.17.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.1.8"

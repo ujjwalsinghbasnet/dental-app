@@ -32,7 +32,7 @@ function Dentists() {
 
   return (
     <Section>
-        <Box mt='-5rem'>
+        <Box mt='-5rem' id='dentists'>
             <Heading as='h1' fontSize={'4rem'} color='primary' textAlign={'center'} lineHeight={'90%'} mb='4rem'>Dentists</Heading>
             <Flex
               justify='space-between'

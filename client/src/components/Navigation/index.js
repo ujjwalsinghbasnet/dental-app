@@ -57,10 +57,10 @@ function Navigation() {
         zIndex={3}
       >
           <Flex color='menu' w='40%' justify='space-between'>
-            <NavLink to='/'>Home</NavLink>
-            <NavLink to='#services'>Services</NavLink>
-            <NavLink to='#'>Dentists</NavLink>
-            <NavLink to='#'>Contact Us</NavLink>
+            <a href='/#home'>Home</a>
+            <a href='#services'>Services</a>
+            <a href='/#dentists'>Dentists</a>
+            <a href='/#contact-us'>Contact Us</a>
           </Flex>
           {
             ! isLoggedIn ? ( 

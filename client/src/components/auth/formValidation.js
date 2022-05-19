@@ -4,11 +4,12 @@ export const formValidation = (userData) => {
     if(password !== password1){
         return { status: false, title: 'Password Mismatched!', message: 'both password must match.'};
       }
+      //eslint-disable-next-line
       const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/;
       //(?=.*[A-Za-z]) at least one uppercase and one lowercase
       //(?=.*\d) at least one number
       //(?=.*[@$!%*#?&]) at least one special symbols
-  
+      //eslint-disable-next-line
       const emailRegex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
       const phoneRegex = /^[0-9]{10,13}$/;
     //   const nameRegex = /^[a-zA-Z]+" *"{6,50}$/;
@@ -31,6 +32,7 @@ export const formValidation = (userData) => {
 export const loginValidation = (userData) => {
   const { email, password } = userData;   
 
+  //eslint-disable-next-line
   const emailRegex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
   if(email==='' || password===''){

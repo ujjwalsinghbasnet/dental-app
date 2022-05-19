@@ -1,10 +1,9 @@
 import axios from 'axios'
 
-const API_URL = 'https://dental-world-app.herokuapp.com/'
+const API_URL = 'https://dental-world-app.herokuapp.com/api/'
 
 //user related information retrieved
 const register = async (formData) => {
-    console.log(formData)
     const user = await axios.post(API_URL+ 'users', formData)
     return user.data
 }
@@ -22,7 +21,7 @@ const changePassword = async (data) => {
 }
 
 const changeDetails = async (data) => {
-    const update = await axios.put(API_URL + `users/${data.id}`, data.info)
+    await axios.put(API_URL + `users/${data.id}`, data.info)
     const user = await axios.get(API_URL + `users/${data.id}`)
     return user.data.results
 }
@@ -54,7 +53,7 @@ const getScheduledAppointments = async(date) => {
 }
 
 const markVisited = async (data) => {
-    const appointment = await axios.put(API_URL + `appointments/${data.id}`, {
+    await axios.put(API_URL + `appointments/${data.id}`, {
         headers: {
             'auth':`Bearer ${data.token}`
         }

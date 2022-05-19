@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Flex, Heading } from '@chakra-ui/react'
+import { Box, Heading } from '@chakra-ui/react'
 import Section from '../Layouts/SectionLayout';
 
 const Footer = () => {

@@ -13,6 +13,7 @@ function UserAppointment() {
 
   useEffect(() => {
     dispatch(getUserAppointments(user?.token))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
   return (

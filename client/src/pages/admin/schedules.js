@@ -23,6 +23,7 @@ function Schedules() {
 
   useEffect(() => {
     dispatch(getAvailableAppointment(date))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
   const focusAppointment = (id) => {

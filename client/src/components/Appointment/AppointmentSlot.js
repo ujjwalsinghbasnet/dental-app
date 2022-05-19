@@ -8,7 +8,7 @@ import {
 
 function AppointmentSlot({ appointment,handleClick,active }) {
 
-  const { _id,timeslot,doctor,space,price } = appointment
+  const { _id,timeslot,doctor,space } = appointment
   return (
     <Box 
       w='100%'

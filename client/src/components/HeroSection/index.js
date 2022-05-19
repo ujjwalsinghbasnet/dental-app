@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import {
     Box,
     Flex,
     Heading,
     Text,
-    Image,
     Button
   } from '@chakra-ui/react'
 import NavResponsive from '../NavResponsive';

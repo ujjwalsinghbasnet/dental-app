@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Box, Button, Flex, FormControl, FormLabel, Heading, Input, Select, toast, useToast } from '@chakra-ui/react'
+import { Box, Button, Flex, FormControl, FormLabel, Heading, Input, Select, useToast } from '@chakra-ui/react'
 import fetchServices from '../../features/services'
 import { useDispatch } from 'react-redux'
 import { editAvailableAppointment, getAvailableAppointment } from '../../features/appointmentSlice'
@@ -10,17 +10,20 @@ const UpdateDeleteAppointment = ({id,closeUpAndDel}) => {
   const date = new Date()
   const toast = useToast()
 
-  useEffect(async () => {
-    const appointment = await fetchServices.getSingleAvailableAppointment(id)
-    setAppointment(appointment.result)
-  },[])
+  useEffect(() => {
+      async function fetchFunc(){
+          const appointment = await fetchServices.getSingleAvailableAppointment(id)
+          setAppointment(appointment.result)
+      }
+      fetchFunc();
+  },[id])
 
   const handleChange = (e) => {
     setAppointment({...appointment, [e.target.id]: e.target.value})
   }
 
   const deleteHandler = async () => {
-      const appointment = await fetchServices.deleteAvailableAppointment(id)
+      await fetchServices.deleteAvailableAppointment(id)
       toast({
         title: 'Deleted',
         description: 'deleted succesfully',

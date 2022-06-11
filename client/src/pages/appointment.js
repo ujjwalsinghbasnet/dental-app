@@ -164,18 +164,6 @@ function Appointment() {
               ) : (
                 appointments.results &&
                 (appointments.results.length === 0 ? (
-                  // <Heading
-                  //   as="h1"
-                  //   fontSize={{
-                  //     base: "0.9rem",
-                  //     sm: "0.9rem",
-                  //     md: "1rem",
-                  //     lg: "1rem",
-                  //   }}
-                  //   color="#959191"
-                  // >
-                  //   No available appointments...
-                  // </Heading>
                   <EmptyList />
                 ) : (
                   appointments.results.map((appointment) => (

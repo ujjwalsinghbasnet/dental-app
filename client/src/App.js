@@ -1,9 +1,6 @@
 import React, { Suspense } from "react";
 import { Route, Routes } from "react-router";
-<<<<<<< HEAD
 import Loader from "./components/Loader";
-=======
->>>>>>> 0faf25b5bb8c313b32bfdf49ea0cc24cfef72c1d
 import Home from "./pages/Home";
 
 const Signup = React.lazy(() => import("./components/auth/Signup"));
@@ -26,11 +23,7 @@ function App() {
       <Route
         path="/auth/login"
         element={
-<<<<<<< HEAD
           <Suspense fallback={<Loader />}>
-=======
-          <Suspense fallback={<div>Loading...</div>}>
->>>>>>> 0faf25b5bb8c313b32bfdf49ea0cc24cfef72c1d
             <Login />
           </Suspense>
         }
@@ -38,11 +31,7 @@ function App() {
       <Route
         path="/auth/register"
         element={
-<<<<<<< HEAD
           <Suspense fallback={<Loader />}>
-=======
-          <Suspense fallback={<div>Loading...</div>}>
->>>>>>> 0faf25b5bb8c313b32bfdf49ea0cc24cfef72c1d
             <Signup />
           </Suspense>
         }
@@ -50,11 +39,7 @@ function App() {
       <Route
         path="/appointment"
         element={
-<<<<<<< HEAD
           <Suspense fallback={<Loader />}>
-=======
-          <Suspense fallback={<div>Loading...</div>}>
->>>>>>> 0faf25b5bb8c313b32bfdf49ea0cc24cfef72c1d
             <ProtectedRoute>
               <Appointment />
             </ProtectedRoute>
@@ -64,11 +49,7 @@ function App() {
       <Route
         path="/admin/"
         element={
-<<<<<<< HEAD
           <Suspense fallback={<Loader />}>
-=======
-          <Suspense fallback={<div>Loading...</div>}>
->>>>>>> 0faf25b5bb8c313b32bfdf49ea0cc24cfef72c1d
             <ProtectedRoute>
               <Dashboard />
             </ProtectedRoute>
@@ -78,11 +59,7 @@ function App() {
       <Route
         path="/admin/patients"
         element={
-<<<<<<< HEAD
           <Suspense fallback={<Loader />}>
-=======
-          <Suspense fallback={<div>Loading...</div>}>
->>>>>>> 0faf25b5bb8c313b32bfdf49ea0cc24cfef72c1d
             <ProtectedRoute>
               <Patients />
             </ProtectedRoute>
@@ -92,11 +69,7 @@ function App() {
       <Route
         path="/admin/doctors"
         element={
-<<<<<<< HEAD
           <Suspense fallback={<Loader />}>
-=======
-          <Suspense fallback={<div>Loading...</div>}>
->>>>>>> 0faf25b5bb8c313b32bfdf49ea0cc24cfef72c1d
             <ProtectedRoute>
               <Doctors />
             </ProtectedRoute>
@@ -106,11 +79,7 @@ function App() {
       <Route
         path="/admin/appointments"
         element={
-<<<<<<< HEAD
           <Suspense fallback={<Loader />}>
-=======
-          <Suspense fallback={<div>Loading...</div>}>
->>>>>>> 0faf25b5bb8c313b32bfdf49ea0cc24cfef72c1d
             <ProtectedRoute>
               <Appointments />
             </ProtectedRoute>
@@ -120,11 +89,7 @@ function App() {
       <Route
         path="/admin/schedules"
         element={
-<<<<<<< HEAD
           <Suspense fallback={<Loader />}>
-=======
-          <Suspense fallback={<div>Loading...</div>}>
->>>>>>> 0faf25b5bb8c313b32bfdf49ea0cc24cfef72c1d
             <ProtectedRoute>
               <Schedules />
             </ProtectedRoute>
@@ -134,11 +99,7 @@ function App() {
       <Route
         path="/user/profile"
         element={
-<<<<<<< HEAD
           <Suspense fallback={<Loader />}>
-=======
-          <Suspense fallback={<div>Loading...</div>}>
->>>>>>> 0faf25b5bb8c313b32bfdf49ea0cc24cfef72c1d
             <ProtectedRoute>
               <UserProfile />
             </ProtectedRoute>
@@ -148,11 +109,7 @@ function App() {
       <Route
         path="/user/appointments"
         element={
-<<<<<<< HEAD
           <Suspense fallback={<Loader />}>
-=======
-          <Suspense fallback={<div>Loading...</div>}>
->>>>>>> 0faf25b5bb8c313b32bfdf49ea0cc24cfef72c1d
             <ProtectedRoute>
               <UserAppointment />
             </ProtectedRoute>

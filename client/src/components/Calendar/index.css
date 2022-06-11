@@ -1,0 +1,47 @@
+.react-calendar {
+  width: 20rem;
+  height: 18.5rem;
+  background-image: linear-gradient(to right, #18d2ae, #0fcfea);
+  backdrop-filter: blur(5px);
+  padding: 0.8rem;
+  color: white;
+}
+.react-calendar__navigation {
+  display: flex;
+  margin-bottom: 1rem;
+}
+.react-calendar__navigation__prev-button {
+  margin-left: 2rem;
+}
+.react-calendar__navigation__next-button {
+  margin-right: 2rem;
+}
+.react-calendar__month-view__weekdays {
+  margin-bottom: 0.6rem;
+}
+abbr {
+  text-decoration: none !important;
+}
+.react-calendar__tile {
+  height: 2rem;
+  width: 2rem;
+}
+.react-calendar__tile--active {
+  background-color: #0d7ea6;
+  border-radius: 50%;
+}
+.react-calendar__month-view__days > button:disabled {
+  color: rgb(218, 230, 218);
+}
+
+.react-date-picker__wrapper {
+  width: 20rem;
+  background-color: transparent;
+  display: flex;
+  justify-content: space-evenly;
+  padding-right: 15%;
+  padding-left: 15%;
+}
+.react-date-picker__inputGroup__input {
+  background-color: transparent;
+}
